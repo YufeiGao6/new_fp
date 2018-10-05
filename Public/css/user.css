@@ -1,0 +1,353 @@
+i {
+    cursor: pointer;
+}
+
+.h{
+    position: relative;
+    z-index: 10;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    word-break: break-word;
+}
+
+.wrapper {
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    height:140px;
+    background-image: url('../images/left.jpeg');
+    background-size: 100%;
+}
+
+.mesg{
+     margin-top:-60px;
+     font-size: 6px;
+     opacity: 0;
+     margin-bottom: 2px;
+     color: #4c5b7a;
+}
+
+.mesg2{
+    margin-top:-60px;
+    font-size: 6px;
+    animation-name: myAnimation;
+    animation-duration: 3000ms;
+    animation-fill-mode: forwards;
+    opacity: 1;
+    margin-bottom: 2px;
+    color: #4c5b7a;
+}
+
+@keyframes myAnimation{
+    0%{
+        opacity: 1;
+    }
+    70%{
+        opacity: 0.8;
+
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+/***********global style***************/
+body{
+    background-color: #e8f1f0;
+    margin:0px;
+}
+
+*{
+    font-family: 'Raleway', sans-serif;
+}
+
+#section{
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1000;
+}
+
+/***********header style ********/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #d7dfe9;
+    /* #e0cdcf, #ddc9cf, #d8c5d0, #d1c2d2, #c9c0d3 */
+    vertical-align: center;
+    z-index: 5;
+    height: 50px;
+}
+
+/***********tags container style *************/
+.container{
+    position: relative;
+    float: left;
+    width:300px;
+    height: 420px;
+    background-color: #fff;
+    margin: 40px 50px 0px;
+    box-shadow: 0 1px 6px rgba(36,37,38,.08);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow .25s ease,transform .25s ease;
+}
+
+.tag-container{
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+}
+
+/***********button style************/
+.nav-btn{
+    margin-left:800px;
+}
+
+.btn{
+    background: transparent;
+    border:0px;
+}
+
+.delete-btn{
+    z-index: 1;
+    top: 28px;
+    font-size: 13px;
+    color: #6068A9;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    margin-right: 0px;
+}
+
+.edit-btn{
+    z-index: 1;
+    top: 28px;
+    margin-left: 200px;
+    font-size: 13px;
+    color: #6068A9;;
+    text-decoration: none;
+    padding-right: 0px;
+    margin-top: 5px;
+    margin-right: 0px;
+}
+
+.update-btn{
+    opacity: 0;
+}
+
+.save-btn{
+    color: #6068A9;
+    margin-left: 5px;
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.save-btn:hover{
+    background-color: #6068A9;;
+    color:white;
+}
+
+.home-btn{
+    color: #6068A9;
+    font-size:15px;
+}
+
+.tag_id {
+    font-size: 2px;
+}
+
+#user-head {
+    border-radius: 50%;
+    width: 20px;
+}
+
+.head-btn{
+    background:transparent;
+    font: 16px Montserrat;
+    color:#6068A9;
+    border: none;
+    height: 40px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 2px;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+#Welcome{
+    color: #6068A9;
+    margin-top: -30px;
+    padding-top: -30px;
+}
+
+/***********style of the bubbles************/
+li {
+    position: absolute;
+    bottom: -160px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0);
+    list-style: none;
+    animation: square 15s 25s;
+    transition-timing-function: linear;
+}
+
+.li-1 {
+    opacity: 0;
+    left: 10%;
+    width:30px;
+    height:30px;
+    background-color: rgba(97, 121, 156, 0.67);
+    animation-delay: 3s;
+    animation-duration: 7s;
+    z-index: -1000;
+
+}
+
+.li-2 {
+    opacity: 0;
+    width:100px;
+    height:100px;
+    background-color: rgba(97, 121, 156, 0.67);
+    left: 20%;
+    animation-delay: 2s;
+    animation-duration: 6s;
+}
+
+.li-3 {
+    opacity: 0;
+    width:40px;
+    height:40px;
+    background-color: rgba(97, 121, 156, 0.67);
+    left: 25%;
+    animation-delay: 4s;
+}
+
+.li-4 {
+    opacity: 0;
+    width:10px;
+    height:10px;
+    background-color: rgba(97, 121, 156, 0.67);
+    left: 40%;
+    animation-delay: 4s;
+    animation-duration: 8s;
+}
+
+.li-5{
+    opacity: 0;
+    width:25px;
+    height:25px;
+    background-color: rgba(97, 121, 156, 0.67);
+    left: 70%;
+    animation-delay: 2s;
+    animation-duration: 6s;
+}
+
+.li-6 {
+    opacity: 0;
+    left: 80%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1s;
+    background-color: rgba(97, 121, 156, 0.2);
+}
+
+.li-7 {
+    opacity: 0;
+    left: 32%;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(97, 121, 156, 0.67);
+    animation-delay: 5s;
+}
+
+.li-8{
+    opacity: 0;
+    left: 55%;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(97, 121, 156, 0.67);
+    animation-delay: 4s;
+    animation-duration: 7s;
+}
+
+.li-9{
+    opacity: 0;
+    left: 25%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 3s;
+    animation-duration: 6s;
+    background-color: rgba(97, 121, 156, 0.3);
+}
+
+.li-10 {
+    opacity: 0;
+    left: 85%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+    animation-duration: 4s;
+}
+
+@keyframes square {
+    0% {
+        opacity: 0;
+        transform: translateY(0px) rotate(45deg);
+        z-index: -1000;
+    }
+    15% {
+        opacity: 0.5;
+        transform: translateY(-200px) rotate(45deg);
+    }
+    25% {
+        opacity: 0.75;
+        transform: translateY(-400px) rotate(90deg)
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-600px) rotate(135deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-1000px) rotate(180deg);
+    }
+}
+
+hr.style-one {
+    border: 0;
+    height: 2px;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #7e8aa2, #93a2bc, #ccc);
+    background-image: -moz-linear-gradient(left, #333, #ccc, #ccc);
+    background-image: -ms-linear-gradient(left, #333, #ccc, #ccc);
+    background-image: -o-linear-gradient(left, #333, #ccc, #ccc);
+}
+
+.hr-style {
+    margin: 0 auto;
+    width: 1100px;
+}
+
+.bg-bubbles {
+    margin-top: 0;
+}
+
+.my-post {
+    margin-bottom: 2px;
+    font-family: 'Montserrat', sans-serif;
+    color: darkslateblue;
+}
+
+.container {
+    margin-top: 5px;
+}

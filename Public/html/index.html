@@ -1,0 +1,162 @@
+<html lang="en" xmlns:style="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sticky Post</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/wordCloud.css"/>
+    <script src="../js/scripts.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|M+PLUS+Rounded+1c|Mali|Montserrat|Nixie+One" rel="stylesheet">
+    <link rel ="icon" href="/icon.ico"/>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <div style="display: flex">
+            <h3 id = "shareTitle">SHARE YOUR FEELINGS WITH</h3>
+            <div class='masthead-image' id='master-container' style="margin-top: 13px; margin-left:13px;">
+                <div class='content center'>
+                    <h1 id='master'>
+                      <div id='master-container-scroller'>
+                        <div class='master-container-scroller_item'>Her 👩‍💻
+                        </div>
+                        <div class='master-container-scroller_item'>Her 👩‍🏫
+                        </div>
+                        <div class='master-container-scroller_item'>Him 👨‍🍳
+                        </div>
+                        <div class='master-container-scroller_item'>Her 👩‍🔬
+                        </div>
+                        <div class='master-container-scroller_item'>Him 👨‍✈️
+                        </div>
+                        <div class='master-container-scroller_item'>Her 👩‍🏭
+                        </div>
+                        <div class='master-container-scroller_item'>Him 👨‍🚀
+                        </div>
+                        <div class='master-container-scroller_item'>Him 👨‍🎨
+                        </div>
+                        <div class='master-container-scroller_item'>Her 👩‍🎓
+                        </div>
+                        <div class='master-container-scroller_item' >Him 👨‍🌾
+                        </div>
+                      </div>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <button class="link-btn" id="add-btn" > Create a Post </button>
+            <button class="link-btn" id="log-btn" > Login/Signup </button>
+            <span id="Welcome"></span>
+            <button class="link-btn" id="user-btn" title="User Page" onclick="{location.href='user.html'}"><img id="user-head" src="" alt=""></button>
+        </nav>
+    </header>
+    <div class="menuHolder2"></div>
+    <div class="menuHolder">
+        <div class="menuWindow">
+            <ul class="p1">
+                <li class="s1"><a  style="font-size: 16px"><span class="menu-font">Menu</span></a>
+                    <ul class="p2">
+                        <li class="s2"><a href="#home"><span class="menu-content">Home</span></a>
+                        </li>
+                        <li class="s2"><a href="#about"><span id="about-btn" class="menu-content">About</span></a>
+                        </li>
+
+                        <li class="s2"><a href='https://github.com/YufeiGao6/a4-webapp'><span class="menu-content">Github</span></a>
+                        </li>
+
+                        <li class="s2"><a href='mailto:ygao6@wpi.edu; rwang5@wpi.edu; ywu8@wpi.edu; dxu2@wpi.edu?subject=Give us feedback' style = "font-size: 12px"><span class="menu-content">Feedback</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id = "loader" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
+    <div id="log-page" class="model">
+        <div class="model-content">
+            <span class="close">&times;</span>
+        </div>
+
+        <p class="title">Login</p>
+
+        <div class="input-group input-group-icon" style="margin-top: 30px">
+            <input type="text" placeholder="Username" id="loginUsername"/>
+            <div class="input-icon"><i class="fa fa-user"></i></div>
+        </div>
+
+        <div class="input-group input-group-icon">
+            <input type="password" id="loginPassword" placeholder="Password"/>
+            <div class="input-icon"><i class="fa fa-key"></i></div>
+            <div class="psw-icon"><button class="hide-btn" type="button" onclick="hideShowPsw()"><i id="hide" class="far fa-eye-slash"></i></button></div>
+        </div>
+
+        <p id="msgAlert" style="color: red; text-align: center;"></p>
+
+        <div class="login_control">
+            <button class="btn" type="button" onclick="login()">Log in</button>
+        </div>
+        <hr/>
+        <div class="signup_control">
+            <p class="signup-mes">Don't have an account?</p>
+            <button style="margin-top: 10px" class="btn" type="button" onclick="{location.href='signup.html'}">Sign up</button>
+        </div>
+
+    </div>
+
+    <div id="add-page" class="model">
+        <div class="model-content">
+            <span class="close2">&times;</span>
+        </div>
+        <p class="title2">Write down your feelings...</p>
+        <div class="text-control">
+            <textarea class="tag-content" id="tag-content"> </textarea>
+        </div>
+        <div class="create-control">
+            <button class="btn" type="button" onclick="postTag()"> Post </button>
+        </div>
+    </div>
+
+    <div id="about-page" class="model">
+        <div class="model-content">
+            <span class="close3">&times;</span>
+        </div>
+        <h3 class="about-header">About</h3>
+        <p class="about-content">
+            Our social media application, Sticky Post, allows users to leave messages and share feelings with friends, families or colleagues.
+
+            The users' messages will appear on the screen as posts. The only thing they need to do is just login to their accounts. Then, they can create, edit or delete post(s) freely.  Users can press the like button on any post to let the post-creator know their feelings about post-creator's post.
+        </p>
+    </div>
+
+    <div id = "outer">
+        <div id="word-cloud"></div>
+    </div>
+
+
+    <div class="footer">
+        <div id="button"></div>
+      <div id="container">
+      <div id="cont">
+      <div class="footer_center">
+             <h3>© 2018 Copyright: BaBaMen <a href="https://github.com/YufeiGao6" target="_blank"> Yufei Gao,
+                                          <a href="https://github.com/ruyuewang" target="_blank"> Ruyue Wang,
+                                          <a href="https://github.com/dxu2" target="_blank"> Da Xu,
+                                          <a href="https://github.com/YuxinWu1998" target="_blank"> Yuxin Wu
+             </h3>
+      </div>
+      </div>
+      </div>
+      </div>
+
+
+</body>
+</html>

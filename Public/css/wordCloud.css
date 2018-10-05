@@ -1,0 +1,89 @@
+#word-cloud {
+  height: 100vh;
+  width: 100vw;
+  margin: 5px;
+}
+
+body, html, p {
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  word-wrap:break-word;
+  word-break:break-all;
+  min-width: 150px;
+  max-width: 250px;
+  position: absolute;
+  z-index: 0;
+}
+
+.tag{
+  max-width: 250px;
+  border: 0px solid black;
+  margin: 10px;
+  background-color: white;
+  z-index: 0;
+  animation: 0.55s bling 0.1s forwards;
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.tag:hover {
+  z-index: 1;
+  animation: 0.85s enlarge 0s forwards;
+}
+
+.like{
+  border: 0 solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content{
+  max-width: 250px;
+  border: 0 solid black;
+  line-height: 1.1em;
+  margin: 0 5px 0 5px;
+}
+
+.likeButton{
+  color: red;
+  padding: 0;
+  margin: 2px;
+  background-color: transparent;
+  border: 0;
+}
+
+.unlikeButton{
+  color: grey;
+  padding: 0;
+  margin: 2px;
+  background-color: transparent;
+  border: 0;
+}
+
+.likeButton:hover{
+  color:red;
+}
+
+@keyframes bling {
+  from {
+    /* transform: scale(8); */
+  }
+  to {
+    /* transform: scale(1); */
+    opacity: 1;
+  }
+}
+
+@keyframes enlarge {
+  to {
+    scale: 1.2;
+    opacity: 1;
+  }
+}
+
+#outer{
+  margin-top: 100px;
+}
