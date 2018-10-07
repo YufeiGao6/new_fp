@@ -4,14 +4,19 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../css/wordCloud.css"/>
-    <script src="../js/scripts.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|M+PLUS+Rounded+1c|Mali|Montserrat|Nixie+One" rel="stylesheet">
-    <link rel ="icon" href="/icon.ico"/>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/emojione@4.0.0/lib/js/emojione.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emojione@4.0.0/extras/css/emojione.min.css"/>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
+    <script type="text/javascript" src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|M+PLUS+Rounded+1c|Mali|Montserrat|Nixie+One" rel="stylesheet">
+    <link rel ="icon" href="/icon.ico"/>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 
@@ -119,6 +124,13 @@
         <p class="title2">Write down your feelings...</p>
         <div class="text-control">
             <textarea class="tag-content" id="tag-content"> </textarea>
+            <script type="text/javascript">
+                // $(document).ready(function() {
+                //     $("#tag-content").emojioneArea({
+                //         pickerPosition: "bottom",
+                //         tonesStyle: "radio"});
+                // });
+            </script>
         </div>
         <div class="create-control">
             <button class="btn" type="button" onclick="postTag()"> Post </button>

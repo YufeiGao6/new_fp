@@ -384,6 +384,7 @@ input:focus + .input-icon:after {
 }
 
 .title2{
+	margin-top: 20px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left:28px;
@@ -483,9 +484,15 @@ i {
 
 .tag-content{
 	width:300px;
-	height:150px;
+	height:200px;
 	resize: none;
 	border:none;
+	margin-left: 80px;
+}
+
+.text-control{
+	width:300px;
+	height:200px;
 }
 
 .create-control{
@@ -494,9 +501,6 @@ i {
 
 }
 
-.tag-content{
-	margin-left: 80px;
-}
 /************about page style***************/
 .about-content{
     padding: 20px;

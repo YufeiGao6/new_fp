@@ -571,3 +571,10 @@ function getTagIdsByAuthorId(authorId, tagId) {
     }
 }
 
+$(document).ready(function() {
+    $("#tag-content").emojioneArea({
+        pickerPosition: "bottom",
+        tonesStyle: "radio"});
+});
+
+

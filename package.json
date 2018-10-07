@@ -8,6 +8,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "emojione": "^4.0.0",
+    "emojionearea": "^3.4.1",
+    "jQuery": "latest",
     "mongoose": "^5.2.18",
     "node-emoji": "^1.8.1"
   }
