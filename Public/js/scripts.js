@@ -31,6 +31,19 @@ window.onload = function () {
         let btn3 = document.getElementById('about-btn');
         let span3 = document.querySelector(".close3");
 
+        let sortByTime = document.getElementById('time');
+        let sortByScore = document.getElementById('score');
+
+        sortByTime.onclick = function(){
+            document.getElementById("word-cloud").innerHTML="";
+            loadTags("time");
+        };
+
+        sortByScore.onclick = function(){
+            document.getElementById("word-cloud").innerHTML="";
+            loadTags("score");
+        };
+
         btn3.onclick = function () {
             model3.style.display = "block";
         };
@@ -89,8 +102,8 @@ window.onload = function () {
         } else {
             document.getElementById('user-btn').style.display = "none";
         }
-        loadTags();
     }());
+    loadTags("score");
         // showUserName();
         // checkIfLogin();
 };
@@ -191,7 +204,12 @@ function hideShowPsw(){
 
 //--------------------------------------word cloud tag 相关-------------------------------------------------------
 
-function loadTags() {
+/**
+ * load posts, create word cloud
+ * @returns {Array}
+ */
+function loadTags(hotness) {
+
     var flag = 0;
     let xhr = new XMLHttpRequest();
     xhr.open("get", "/loadTags");
@@ -242,10 +260,19 @@ function loadTags() {
             let index = Math.floor((Math.random()*colors.length));
             return colors[index];
         }
-
-        tags.sort(function(a, b) {
-            return -1 * (a.score - b.score);
-        });
+        
+        if(hotness === "time"){
+            tags.sort(function(a,b){
+                // Turn your strings into dates, and then subtract them
+                // to get a value that is either negative, positive, or zero.
+                return new Date(b.date) - new Date(a.date);
+            });
+        }
+        else{
+            tags.sort(function(a, b) {
+                return -1 * (a.score - b.score);
+            });
+        }
 
         var cloud = document.getElementById("word-cloud");
         cloud.style.position = "relative";
@@ -276,8 +303,15 @@ function loadTags() {
             let id = tag._id;
             let word = tag.content;
             let score = tag.score;
-            let freq = 1.2*score+12;
             let date = new Date(tag.date);
+            let freq = 0;
+
+            if(hotness==="time"){
+                freq = date.valueOf()/100000000000;
+            }
+            else{
+                freq = 1.2*score+12;
+            }
 
             let month = date.getMonth()+1;
             let day = date.getDate();
@@ -484,7 +518,9 @@ function loadTags() {
     return tags;
 }
 
-
+/**
+ * create new post
+ */
 function postTag() {
     let curUser = JSON.parse(sessionStorage.getItem('user'));
     let authorId = curUser.id;
@@ -571,6 +607,9 @@ function getTagIdsByAuthorId(authorId, tagId) {
     }
 }
 
+/**
+ * emoji
+ */
 $(document).ready(function() {
     $("#tag-content").emojioneArea({
         pickerPosition: "bottom",

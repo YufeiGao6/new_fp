@@ -104,5 +104,5 @@ Want to know the most popular topics among friends? The more "like" a post gets,
 
 Reference:
 Word Cloud: https://codepen.io/stevn/pen/JdwNgw  
-Title Scroller: https://codepen.io/halvo/pen/BWQxWm
+Title Scroller: https://codepen.io/halvo/pen/BWQxWm  
 Emoji Picker: https://github.com/mervick/emojionearea

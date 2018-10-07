@@ -55,6 +55,8 @@
         </div>
 
         <nav>
+            <button class="link-btn" id="time" > Sort by Time </button>
+            <button class="link-btn" id="score" > Sort by Hotness </button>
             <button class="link-btn" id="add-btn" > Create a Post </button>
             <button class="link-btn" id="log-btn" > Login/Signup </button>
             <span id="Welcome"></span>
@@ -124,13 +126,6 @@
         <p class="title2">Write down your feelings...</p>
         <div class="text-control">
             <textarea class="tag-content" id="tag-content"> </textarea>
-            <script type="text/javascript">
-                // $(document).ready(function() {
-                //     $("#tag-content").emojioneArea({
-                //         pickerPosition: "bottom",
-                //         tonesStyle: "radio"});
-                // });
-            </script>
         </div>
         <div class="create-control">
             <button class="btn" type="button" onclick="postTag()"> Post </button>
