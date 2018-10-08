@@ -209,6 +209,8 @@ function hideShowPsw(){
  * @returns {Array}
  */
 function loadTags(hotness) {
+    let load = document.getElementById("loader");
+    load.className = "lds-roller";
 
     var flag = 0;
     let xhr = new XMLHttpRequest();
