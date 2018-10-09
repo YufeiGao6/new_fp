@@ -1,4 +1,26 @@
 
+
+function checkAni() {
+    let cta = document.getElementById("cta");
+    let createPage = document.getElementById("login-text");
+    let createContent = document.getElementById("create-content");
+    var temp = createPage.className;
+
+    if(temp === "login-text") {
+        createPage.className = "login-text2";
+        createContent.className = "show-hide";
+        cta.className = "fas fa-arrow-up";
+    }else{
+        createPage.className = "login-text";
+        cta.className = "fas fa-arrow-down";
+        createContent.className = "text";
+    }
+
+}
+
+
+
+
 function User(id, username, email, tagsId, photourl) {
     let o = {};
     o.id = id;
@@ -23,7 +45,7 @@ window.onload = function () {
         let btn = document.getElementById('log-btn');
         let span = document.querySelector(".close");
 
-        let model2 = document.getElementById('add-page');
+        let model2 = document.getElementById('wrapper');
         let btn2 = document.getElementById('add-btn');
         let span2 = document.querySelector(".close2");
 
@@ -33,6 +55,7 @@ window.onload = function () {
 
         let sortByTime = document.getElementById('time');
         let sortByScore = document.getElementById('score');
+
 
         sortByTime.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
@@ -107,6 +130,7 @@ window.onload = function () {
         // showUserName();
         // checkIfLogin();
 };
+
 //function to hide/show te password
 function hideShowPsw(){
     let hide = document.getElementById("hide");

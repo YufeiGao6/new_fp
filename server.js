@@ -62,7 +62,7 @@ let server = http.createServer (function (req, res) {
     let uri = url.parse(req.url);
   switch( uri.pathname ) {
     case '/':
-        sendFile(res, 'Public/html/index.html');
+        sendFile(res, 'Public/html/start.html');
         break;
     case '/index.html':
         sendFile(res, 'Public/html/index.html');
@@ -72,6 +72,9 @@ let server = http.createServer (function (req, res) {
         break;
     case '/user.html':
         sendFile(res, 'Public/html/user.html');
+        break;
+  case '/start.html':
+        sendFile(res, 'Public/html/start.html');
         break;
     case '/css/style.css':
         sendFile(res, 'Public/css/style.css', 'text/css');
@@ -85,6 +88,9 @@ let server = http.createServer (function (req, res) {
     case '/css/user.css':
         sendFile(res, 'Public/css/user.css', 'text/css');
         break;
+    case '/css/start.css':
+        sendFile(res, 'Public/css/start.css', 'text/css');
+        break;
     case '/js/scripts.js':
         sendFile(res, 'Public/js/scripts.js', 'text/javascript');
         break;
@@ -94,6 +100,9 @@ let server = http.createServer (function (req, res) {
     case '/js/user.js':
         sendFile(res, 'Public/js/user.js', 'text/javascript');
         break;
+    case '/js/start.js':
+          sendFile(res, 'Public/js/start.js', 'text/javascript');
+          break;
     case '/icon.ico':
         sendFile(res, 'icon.ico');
         break;

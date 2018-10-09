@@ -57,12 +57,13 @@
         <nav>
             <button class="link-btn" id="time" > Sort by Time </button>
             <button class="link-btn" id="score" > Sort by Hotness </button>
-            <button class="link-btn" id="add-btn" > Create a Post </button>
+            <button class="link-btn" id="add-btn">Create a Post</button>
             <button class="link-btn" id="log-btn" > Login/Signup </button>
             <span id="Welcome"></span>
             <button class="link-btn" id="user-btn" title="User Page" onclick="{location.href='user.html'}"><img id="user-head" src="" alt=""></button>
         </nav>
     </header>
+
     <div class="menuHolder2"></div>
     <div class="menuHolder">
         <div class="menuWindow">
@@ -119,18 +120,29 @@
 
     </div>
 
-    <div id="add-page" class="model">
-        <div class="model-content">
+
+    <div class="wrapper" id="wrapper">
+        <div  id="login-text" class="login-text">
             <span class="close2">&times;</span>
+            <button class="cta" onclick="checkAni()"><i id="cta" class="fas fa-arrow-down"></i></button>
+            <div id="create-content" class="text">
+                <div class="text-control">
+                    <textarea class="tag-content" id="tag-content"> </textarea>
+                </div>
+                <div class="create-control">
+                    <button class="post-btn" onclick="postTag()"> Post </button>
+                </div>
+
+            </div>
         </div>
-        <p class="title2">Write down your feelings...</p>
-        <div class="text-control">
-            <textarea class="tag-content" id="tag-content"> </textarea>
-        </div>
-        <div class="create-control">
-            <button class="btn" type="button" onclick="postTag()"> Post </button>
+
+        <div id ="call-text" class="call-text">
+            <h1>Start sharing <span>your feelings</span>...</h1>
         </div>
     </div>
+
+
+
 
     <div id="about-page" class="model">
         <div class="model-content">
