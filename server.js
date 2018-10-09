@@ -276,7 +276,6 @@ let server = http.createServer (function (req, res) {
                       console.log("err");
                   }else {
                       sentBackTag = docs;
-                      console.log(sentBackTag);
                       res.end(JSON.stringify(sentBackTag));
                   }
               });
