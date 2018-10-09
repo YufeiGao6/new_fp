@@ -1,9 +1,19 @@
-.start-btn{
+.start{
     z-index: 1000;
     margin-top: 30%;
     margin-left: 45%;
     position: absolute;
 
+}
+
+.start-btn{
+    background: transparent;
+    padding:20px;
+
+}
+
+.start-btn:hover{
+    background: rgba(233, 233, 233, 0.77);
 }
 
 #canvas{
