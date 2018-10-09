@@ -247,7 +247,7 @@ let server = http.createServer (function (req, res) {
               });
           });
           break;
-      case '/getTagIdsByAuthorId':
+      case '/getUserById':
           let authorData = '';
           req.on('data', function (d) {
               authorData += d;
@@ -259,6 +259,24 @@ let server = http.createServer (function (req, res) {
                       console.log("err");
                   }else {
                       sentBackTag = docs;
+                      res.end(JSON.stringify(sentBackTag));
+                  }
+              });
+          });
+          break;
+      case '/getUsernameById':
+          let author = '';
+          req.on('data', function (d) {
+              author += d;
+          });
+          req.on('end', function () {
+              let sentBackTag = [];
+              User.findOne({_id: author}, function(err, docs) {
+                  if(err) {
+                      console.log("err");
+                  }else {
+                      sentBackTag = docs;
+                      console.log(sentBackTag);
                       res.end(JSON.stringify(sentBackTag));
                   }
               });

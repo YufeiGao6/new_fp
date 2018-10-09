@@ -150,6 +150,7 @@ function login() {
         showLogInStatus();
     }
 }
+
 function logOut(){
     document.getElementById("loginUsername").innerText = "";
     document.getElementById("loginPassword").innerText = "";
@@ -302,6 +303,7 @@ function loadTags(hotness) {
                 userId = curUser.id;
             }
             let id = tag._id;
+            let authorId = tag.authorId;
             let word = tag.content;
             let score = tag.score;
             let date = new Date(tag.date);
@@ -326,9 +328,11 @@ function loadTags(hotness) {
             let container = document.createElement("div");
             let tagContainer = document.createElement("div");
             let likeContainer = document.createElement("div");
+            let authorContainer = document.createElement("div");
             let contentContainer = document.createElement("div");
             let likeButton = document.createElement("button");
             let post = document.createElement("p");
+            let hr = document.createElement("hr");
 
             container.className = "container";
             container.id = id;
@@ -345,6 +349,34 @@ function loadTags(hotness) {
             };
 
             dateContainer.innerText = date;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "/getUsernameById");
+            xhr.send(authorId);
+            let authorName = "";
+            xhr.onreadystatechange = handle_res;
+            function handle_res() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    return;
+                }
+                let sentBackObj = JSON.parse(this.responseText);
+
+                if(sentBackObj){
+                    authorName = sentBackObj.username;
+                    authorContainer.innerText = "Author: "+authorName;
+                }
+                else{
+                    authorContainer.innerText = "Author: Anonymous";
+                }
+                authorContainer.style.fontSize = freq*0.8 +"px";
+                authorContainer.style.marginLeft = "5px";
+                authorContainer.style.marginBottom = "5px";
+                authorContainer.style.color = "grey";
+                authorContainer.style.fontFamily = "Helvetica";
+            }
 
             if (checkCurUser()){ // user logged in
                 if(likeUserIds.includes(userId)){
@@ -427,7 +459,10 @@ function loadTags(hotness) {
             likeSubCon.appendChild(likeButton);
             likeContainer.appendChild(likeSubCon);
             likeContainer.appendChild(dateContainer);
+            likeSubCon.style.fontFamily = "Helvetica";
             likeContainer.className = "like";
+            likeContainer.style.fontFamily = "Helvetica";
+            dateContainer.style.fontFamily = "Helvetica";
             dateContainer.style.fontSize = freq*0.7 + "px";
             dateContainer.style.paddingTop = 3 + "px";
             likeContainer.style.fontSize = freq + "px";
@@ -441,6 +476,8 @@ function loadTags(hotness) {
             contentContainer.style.padding = freq/5 + "px";
 
             tagContainer.appendChild(likeContainer);
+            tagContainer.appendChild(authorContainer);
+            //tagContainer.appendChild(hr);
             tagContainer.appendChild(contentContainer);
 
             container.appendChild(tagContainer);
@@ -576,7 +613,7 @@ function postTag() {
  */
 function getTagIdsByAuthorId(authorId, tagId) {
     let xhr = new XMLHttpRequest();
-    xhr.open("post", "/getTagIdsByAuthorId");
+    xhr.open("post", "/getUserById");
     xhr.send(authorId);
     let tagIds = [];
     xhr.onreadystatechange = handle_res;
