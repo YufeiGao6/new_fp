@@ -104,9 +104,8 @@ window.onload = function () {
         }
     }());
     loadTags("score");
-        // showUserName();
-        // checkIfLogin();
 };
+
 //function to hide/show te password
 function hideShowPsw(){
     let hide = document.getElementById("hide");
@@ -338,11 +337,11 @@ function loadTags(hotness) {
             tagContainer.style.backgroundColor = randomColor();
             tagContainer.onmouseover = function(){
                 tagContainer.style.transform = "scale("+ (5/freq + 1) +")";
-                container.zIndex = 2;
+                container.style.zIndex = "1";
             };
             tagContainer.onmouseout = function(){
                 tagContainer.style.transform = "scale(1)";
-                container.zIndex = -1;
+                container.style.zIndex = "0";
             };
 
             dateContainer.innerText = date;
@@ -492,7 +491,11 @@ function loadTags(hotness) {
 
         /* =======================  LETS GO! =======================  */
         (function placeWords() {
-            for (var i = 0; i < tags.length; i += 1) {
+            let length = tags.length;
+            if (tags.length>20){
+                length = 20
+            }
+            for (var i = 0; i < length; i += 1) {
 
                 var word = createWordObject(tags[i]);
 
@@ -617,5 +620,3 @@ $(document).ready(function() {
         pickerPosition: "bottom",
         tonesStyle: "radio"});
 });
-
-

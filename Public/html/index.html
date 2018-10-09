@@ -55,8 +55,8 @@
         </div>
 
         <nav>
-            <button class="link-btn" id="time" > Sort by Time </button>
-            <button class="link-btn" id="score" > Sort by Hotness </button>
+            <button class="link-btn" id="time" > Newest Posts </button>
+            <button class="link-btn" id="score" > Hottest Posts </button>
             <button class="link-btn" id="add-btn" > Create a Post </button>
             <button class="link-btn" id="log-btn" > Login/Signup </button>
             <span id="Welcome"></span>
@@ -125,7 +125,8 @@
         </div>
         <p class="title2">Write down your feelings...</p>
         <div class="text-control">
-            <textarea class="tag-content" id="tag-content"> </textarea>
+            <textarea class="tag-content" id="tag-content" onkeypress="maxText()"> </textarea>
+            <p><span id="text-count">150</span>/150</p>
         </div>
         <div class="create-control">
             <button class="btn" type="button" onclick="postTag()"> Post </button>
