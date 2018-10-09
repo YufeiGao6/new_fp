@@ -82,17 +82,35 @@ function loadTagsDB() {
             };
 
             savebtn.onclick = function () {
-                mesg.className = "mesg2";
-                let xhr = new XMLHttpRequest();
-                xhr.open("post", "/editTag");
-                let sentBackObj = [];
-                sentBackObj.push(tagid);
-                sentBackObj.push(tagcontent.innerText);
-                xhr.send(JSON.stringify(sentBackObj));
-                tagcontent.innerText = sentBackObj[1];
-                savebtn.style.opacity = "0";
-                tagcontent.contentEditable = "false";
-                mesg.innerText = "successfully saved the change!";
+                let maxNum = 120;
+
+                if (tagcontent.innerText.length >= maxNum) {
+                    let text = tagcontent.innerText.length - maxNum;
+                    swal({
+                        title: "Your Input Message Is Too Long", 
+                        text: "Please Delete At Least " + text + " Letter(s)",
+                        icon: "warning",
+                        button: "Got It",
+                        closeOnClickOutside: false
+                    });
+                } else {
+                    mesg.className = "mesg2";
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("post", "/editTag");
+                    let sentBackObj = [];
+                    sentBackObj.push(tagid);
+                    sentBackObj.push(tagcontent.innerText);
+                    xhr.send(JSON.stringify(sentBackObj));
+                    tagcontent.innerText = sentBackObj[1];
+                    savebtn.style.opacity = "0";
+                    tagcontent.contentEditable = "false";
+                    swal({
+                        title: "Your Change Has Been Saved", 
+                        icon: "success",
+                        button: "Yeah",
+                        closeOnClickOutside: false
+                    });
+                }
             }
         }
     }

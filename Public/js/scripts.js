@@ -1,4 +1,3 @@
-
 function User(id, username, email, tagsId, photourl) {
     let o = {};
     o.id = id;
@@ -532,7 +531,6 @@ function postTag() {
     let likeUserIds = [];
     likeUserIds.push(authorId);
 
-
     if (content.trim() !== "") {
         let data = {};
         data['authorId'] = authorId;
@@ -540,29 +538,54 @@ function postTag() {
         data['content'] = content.toString();
         data['date'] = date;
         data['likeUserIds'] = likeUserIds;
+        let maxNum = 120;
+        
+        if (data['content'].length >= maxNum) {
+            let text = data['content'].length - maxNum;
+            swal({
+                title: "Your Input Message Is Too Long", 
+                text: "Please Delete At Least " + text + " Letter(s)",
+                icon: "warning",
+                button: "Got It",
+                closeOnClickOutside: false
+            });
+        } else {
+            let sendData = JSON.stringify(data);
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = handle_res;
+            xhr.open("post", "/postTag");
+            xhr.send(sendData);
+    
+            function handle_res() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    return;
+                }
+                let sentBackObj = JSON.parse(this.responseText);
+                let tagId = sentBackObj._id;
+                getTagIdsByAuthorId(authorId, tagId);
 
-        let sendData = JSON.stringify(data);
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = handle_res;
-        xhr.open("post", "/postTag");
-        xhr.send(sendData);
+                swal({
+                    text: "Posts +1", 
+                    button: false,
+                    closeOnClickOutside: false
+                });
 
-        function handle_res() {
-            if (this.readyState !== 4) {
-                return;
+                setTimeout(function(){ location.reload(); }, 1300);
+                }
             }
-            if (this.status !== 200) {
-                return;
-            }
-            let sentBackObj = JSON.parse(this.responseText);
-            let tagId = sentBackObj._id;
-            getTagIdsByAuthorId(authorId, tagId);
-
-            location.reload();
-        }
+        
     }
     else {
-        alert("Please enter something!");
+        swal({
+            title: "Your Input Message Is Empty", 
+            text: "Please Enter Something",
+            icon: "warning",
+            button: "Got It",
+            closeOnClickOutside: false
+        });
     }
 }
 
