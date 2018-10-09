@@ -11,11 +11,9 @@ body, html, p {
 
 .container{
   word-wrap:break-word;
-  word-break:break-all;
   min-width: 150px;
   max-width: 250px;
   position: absolute;
-  z-index: 0;
 }
 
 .tag{
@@ -38,9 +36,11 @@ body, html, p {
   border: 0 solid black;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 0;
 }
 
 .content{
+  word-wrap: break-word;
   max-width: 250px;
   border: 0 solid black;
   line-height: 1.1em;

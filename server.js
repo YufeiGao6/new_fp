@@ -5,9 +5,9 @@ let http = require('http')
   , path = require('path')
   , emoji = require('node-emoji')
   , mongoose = require('mongoose')
-
+    , md5 = require('js-md5')
   , port = 8080;
-console.log(emoji.get('pizza'));
+
 // data fields:
 let dataSet = [];
 let mongoUrl = "mongodb://heroku_wxgxxz0f:9s9gbag43mg230gm92eu9c0hvm@ds117773.mlab.com:17773/heroku_hxnljp4s";
@@ -106,10 +106,10 @@ let server = http.createServer (function (req, res) {
     case '/icon.ico':
         sendFile(res, 'icon.ico');
         break;
-      case '/images/left.jpeg':
+    case '/images/left.jpeg':
           sendFile(res, 'Public/images/left.jpeg');
           break;
-    case '/createUser':
+      case '/createUser':
           let createUserData = "";
           req.on("data", function(d) {
               createUserData += d;
@@ -135,7 +135,7 @@ let server = http.createServer (function (req, res) {
                               let succsMsg = "Successfully create your account!";
                               let curUser = new User({
                                   username: createUserName,
-                                  password: createPassword,
+                                  password: md5(createPassword),
                                   email: createEmail,
                                   tagIds: [],
                                   photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png"
@@ -191,7 +191,6 @@ let server = http.createServer (function (req, res) {
               res.end(JSON.stringify(data));
           });
           break;
-
       case '/login':
           let data = '';
           req.on('data', function (d) {
@@ -207,7 +206,7 @@ let server = http.createServer (function (req, res) {
                   if(err) {
                       console.log("sth wrong with database!");
                   } else if(user){
-                      if(user.password === password) {
+                      if(user.password === md5(password)) {
                           sentBackString = "Successfully login";
                           sentBackObj['sentBackMsg'] = sentBackString;
                           sentBackObj['user'] = user;
@@ -257,7 +256,7 @@ let server = http.createServer (function (req, res) {
               });
           });
           break;
-      case '/getTagIdsByAuthorId':
+      case '/getUserById':
           let authorData = '';
           req.on('data', function (d) {
               authorData += d;
@@ -274,7 +273,23 @@ let server = http.createServer (function (req, res) {
               });
           });
           break;
-
+      case '/getUsernameById':
+          let author = '';
+          req.on('data', function (d) {
+              author += d;
+          });
+          req.on('end', function () {
+              let sentBackTag = [];
+              User.findOne({_id: author}, function(err, docs) {
+                  if(err) {
+                      console.log("err");
+                  }else {
+                      sentBackTag = docs;
+                      res.end(JSON.stringify(sentBackTag));
+                  }
+              });
+          });
+          break;
       case '/likeTag':
           let likeData = '';
           req.on('data', function (d) {
@@ -306,7 +321,6 @@ let server = http.createServer (function (req, res) {
                   });
           });
           break;
-
       case '/unlikeTag':
           let unlikeData = '';
           req.on('data', function (d) {
@@ -338,7 +352,6 @@ let server = http.createServer (function (req, res) {
                   });
           });
           break;
-
       case '/loadTagsDB':
           let data2 = '';
           req.on('data', function (d) {

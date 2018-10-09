@@ -56,7 +56,6 @@ window.onload = function () {
         let sortByTime = document.getElementById('time');
         let sortByScore = document.getElementById('score');
 
-
         sortByTime.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("time");
@@ -127,8 +126,6 @@ window.onload = function () {
         }
     }());
     loadTags("score");
-        // showUserName();
-        // checkIfLogin();
 };
 
 //function to hide/show te password
@@ -175,6 +172,7 @@ function login() {
         showLogInStatus();
     }
 }
+
 function logOut(){
     document.getElementById("loginUsername").innerText = "";
     document.getElementById("loginPassword").innerText = "";
@@ -327,6 +325,7 @@ function loadTags(hotness) {
                 userId = curUser.id;
             }
             let id = tag._id;
+            let authorId = tag.authorId;
             let word = tag.content;
             let score = tag.score;
             let date = new Date(tag.date);
@@ -351,9 +350,11 @@ function loadTags(hotness) {
             let container = document.createElement("div");
             let tagContainer = document.createElement("div");
             let likeContainer = document.createElement("div");
+            let authorContainer = document.createElement("div");
             let contentContainer = document.createElement("div");
             let likeButton = document.createElement("button");
             let post = document.createElement("p");
+            let hr = document.createElement("hr");
 
             container.className = "container";
             container.id = id;
@@ -362,14 +363,42 @@ function loadTags(hotness) {
             tagContainer.style.backgroundColor = randomColor();
             tagContainer.onmouseover = function(){
                 tagContainer.style.transform = "scale("+ (5/freq + 1) +")";
-                container.zIndex = 2;
+                container.style.zIndex = "1";
             };
             tagContainer.onmouseout = function(){
                 tagContainer.style.transform = "scale(1)";
-                container.zIndex = -1;
+                container.style.zIndex = "0";
             };
 
             dateContainer.innerText = date;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "/getUsernameById");
+            xhr.send(authorId);
+            let authorName = "";
+            xhr.onreadystatechange = handle_res;
+            function handle_res() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    return;
+                }
+                let sentBackObj = JSON.parse(this.responseText);
+
+                if(sentBackObj){
+                    authorName = sentBackObj.username;
+                    authorContainer.innerText = "Author: "+authorName;
+                }
+                else{
+                    authorContainer.innerText = "Author: Anonymous";
+                }
+                authorContainer.style.fontSize = freq*0.8 +"px";
+                authorContainer.style.marginLeft = "5px";
+                authorContainer.style.marginBottom = "5px";
+                authorContainer.style.color = "grey";
+                authorContainer.style.fontFamily = "Helvetica";
+            }
 
             if (checkCurUser()){ // user logged in
                 if(likeUserIds.includes(userId)){
@@ -452,7 +481,10 @@ function loadTags(hotness) {
             likeSubCon.appendChild(likeButton);
             likeContainer.appendChild(likeSubCon);
             likeContainer.appendChild(dateContainer);
+            likeSubCon.style.fontFamily = "Helvetica";
             likeContainer.className = "like";
+            likeContainer.style.fontFamily = "Helvetica";
+            dateContainer.style.fontFamily = "Helvetica";
             dateContainer.style.fontSize = freq*0.7 + "px";
             dateContainer.style.paddingTop = 3 + "px";
             likeContainer.style.fontSize = freq + "px";
@@ -466,6 +498,8 @@ function loadTags(hotness) {
             contentContainer.style.padding = freq/5 + "px";
 
             tagContainer.appendChild(likeContainer);
+            tagContainer.appendChild(authorContainer);
+            //tagContainer.appendChild(hr);
             tagContainer.appendChild(contentContainer);
 
             container.appendChild(tagContainer);
@@ -516,7 +550,11 @@ function loadTags(hotness) {
 
         /* =======================  LETS GO! =======================  */
         (function placeWords() {
-            for (var i = 0; i < tags.length; i += 1) {
+            let length = tags.length;
+            if (tags.length>20){
+                length = 20
+            }
+            for (var i = 0; i < length; i += 1) {
 
                 var word = createWordObject(tags[i]);
 
@@ -556,7 +594,6 @@ function postTag() {
     let likeUserIds = [];
     likeUserIds.push(authorId);
 
-
     if (content.trim() !== "") {
         let data = {};
         data['authorId'] = authorId;
@@ -564,29 +601,54 @@ function postTag() {
         data['content'] = content.toString();
         data['date'] = date;
         data['likeUserIds'] = likeUserIds;
+        let maxNum = 120;
 
-        let sendData = JSON.stringify(data);
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = handle_res;
-        xhr.open("post", "/postTag");
-        xhr.send(sendData);
+        if (data['content'].length >= maxNum) {
+            let text = data['content'].length - maxNum;
+            swal({
+                title: "Your Input Message Is Too Long",
+                text: "Please Delete At Least " + text + " Letter(s)",
+                icon: "warning",
+                button: "Got It",
+                closeOnClickOutside: false
+            });
+        } else {
+            let sendData = JSON.stringify(data);
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = handle_res;
+            xhr.open("post", "/postTag");
+            xhr.send(sendData);
 
-        function handle_res() {
-            if (this.readyState !== 4) {
-                return;
+            function handle_res() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    return;
+                }
+                let sentBackObj = JSON.parse(this.responseText);
+                let tagId = sentBackObj._id;
+                getTagIdsByAuthorId(authorId, tagId);
+
+                swal({
+                    text: "Posts +1",
+                    button: false,
+                    closeOnClickOutside: false
+                });
+
+                setTimeout(function(){ location.reload(); }, 1300);
+                }
             }
-            if (this.status !== 200) {
-                return;
-            }
-            let sentBackObj = JSON.parse(this.responseText);
-            let tagId = sentBackObj._id;
-            getTagIdsByAuthorId(authorId, tagId);
 
-            location.reload();
-        }
     }
     else {
-        alert("Please enter something!");
+        swal({
+            title: "Your Input Message Is Empty",
+            text: "Please Enter Something",
+            icon: "warning",
+            button: "Got It",
+            closeOnClickOutside: false
+        });
     }
 }
 
@@ -597,7 +659,7 @@ function postTag() {
  */
 function getTagIdsByAuthorId(authorId, tagId) {
     let xhr = new XMLHttpRequest();
-    xhr.open("post", "/getTagIdsByAuthorId");
+    xhr.open("post", "/getUserById");
     xhr.send(authorId);
     let tagIds = [];
     xhr.onreadystatechange = handle_res;
@@ -641,5 +703,3 @@ $(document).ready(function() {
         pickerPosition: "bottom",
         tonesStyle: "radio"});
 });
-
-

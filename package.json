@@ -11,7 +11,9 @@
     "emojione": "^4.0.0",
     "emojionearea": "^3.4.1",
     "jQuery": "latest",
+    "js-md5": "^0.7.3",
     "mongoose": "^5.2.18",
-    "node-emoji": "^1.8.1"
+    "node-emoji": "^1.8.1",
+    "sweetalert": "^2.1.0"
   }
 }

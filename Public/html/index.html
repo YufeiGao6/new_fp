@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
     <script type="text/javascript" src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
     <script src="../js/scripts.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|M+PLUS+Rounded+1c|Mali|Montserrat|Nixie+One" rel="stylesheet">
     <link rel ="icon" href="/icon.ico"/>
 
@@ -55,15 +56,14 @@
         </div>
 
         <nav>
-            <button class="link-btn" id="time" > Sort by Time </button>
-            <button class="link-btn" id="score" > Sort by Hotness </button>
-            <button class="link-btn" id="add-btn">Create a Post</button>
+            <button class="link-btn" id="time" > Newest Posts </button>
+            <button class="link-btn" id="score" > Newest Posts </button>
+            <button class="link-btn" id="add-btn" > Create a Post </button>
             <button class="link-btn" id="log-btn" > Login/Signup </button>
             <span id="Welcome"></span>
             <button class="link-btn" id="user-btn" title="User Page" onclick="{location.href='user.html'}"><img id="user-head" src="" alt=""></button>
         </nav>
     </header>
-
     <div class="menuHolder2"></div>
     <div class="menuHolder">
         <div class="menuWindow">
@@ -117,7 +117,6 @@
             <p class="signup-mes">Don't have an account?</p>
             <button style="margin-top: 10px" class="btn" type="button" onclick="{location.href='signup.html'}">Sign up</button>
         </div>
-
     </div>
 
 
@@ -140,9 +139,6 @@
             <h1>Start sharing <span>your feelings</span>...</h1>
         </div>
     </div>
-
-
-
 
     <div id="about-page" class="model">
         <div class="model-content">
