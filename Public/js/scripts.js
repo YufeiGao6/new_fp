@@ -1,4 +1,12 @@
-
+function User(id, username, email, tagsId, photourl) {
+    let o = {};
+    o.id = id;
+    o.username = username;
+    o.email = email;
+    o.tagsId = tagsId;
+    o.photourl = photourl;
+    return o;
+}
 
 function checkAni() {
     let cta = document.getElementById("cta");
@@ -18,23 +26,29 @@ function checkAni() {
 
 }
 
-
-function User(id, username, email, tagsId, photourl) {
-    let o = {};
-    o.id = id;
-    o.username = username;
-    o.email = email;
-    o.tagsId = tagsId;
-    o.photourl = photourl;
-    return o;
-}
-
 /**
  * check whether there exists a curUser, if yes, return true; else false;
  * @returns {boolean}
  */
 function checkCurUser() {
     return !JSON.parse(sessionStorage.getItem('user') === null);
+}
+if(window.location.href.includes("?")) {
+    alert("sdfdsf");
+    let paraArray = QuerySearch(window.location.search);
+    let curUserTokenId = paraArray[0];
+    let curUserId = paraArray[1];
+    let curUsername = paraArray[2];
+    let curUseremail = paraArray[3];
+    let curUserphotourl = paraArray[4];
+    let curUser = User(curUserId, curUsername, curUseremail, [], curUserphotourl);
+
+    sessionStorage.setItem("user", JSON.stringify(curUser));
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("post", "/auth");
+    xhr.send(curUserTokenId);
+
 }
 
 window.onload = function () {
@@ -124,8 +138,9 @@ window.onload = function () {
         }
     }());
     loadTags("score");
+        // showUserName();
+        // checkIfLogin();
 };
-
 //function to hide/show te password
 function hideShowPsw(){
     let hide = document.getElementById("hide");
@@ -166,12 +181,10 @@ function login() {
             let sentBackUser = obj.user;
             let curUser = User(sentBackUser._id, sentBackUser.username, sentBackUser.email, sentBackUser.tagsId, sentBackUser.photo_url);;
             window.sessionStorage.setItem('user', JSON.stringify(curUser));
+            showLogInStatus();
         }
-
-        showLogInStatus();
     }
 }
-
 function logOut(){
     document.getElementById("loginUsername").innerText = "";
     document.getElementById("loginPassword").innerText = "";
@@ -183,6 +196,8 @@ function logOut(){
     });
 
     setTimeout(function(){ showLogOutStatus(); }, 1300);
+    // to do:
+    showLogOutStatus();
 }
 
 function showLogOutStatus() {
@@ -194,7 +209,7 @@ function showLogOutStatus() {
         let model = document.getElementById('log-page');
         model.style.display = "block";
     };
-    location.reload();
+    window.location.href = "index.html";
 }
 
 function showLogInStatus() {
@@ -732,3 +747,19 @@ $(document).ready(function() {
         pickerPosition: "bottom",
         tonesStyle: "radio"});
 });
+
+/**
+ * parse the parameter of the url
+ * @param url
+ * @returns {*}
+ * @constructor
+ */
+function QuerySearch(url){
+    let arr = url.split('?')[1].split('&');
+    let resultArray = [];
+    for(let i = 0; i < arr.length; i++) {
+        resultArray.push(arr[i].split('=')[1]);
+    }
+    return resultArray;
+}
+
