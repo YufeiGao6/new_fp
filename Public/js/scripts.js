@@ -1,3 +1,12 @@
+function User(id, username, email, tagsId, photourl) {
+    let o = {};
+    o.id = id;
+    o.username = username;
+    o.email = email;
+    o.tagsId = tagsId;
+    o.photourl = photourl;
+    return o;
+}
 /*
 function generateFulltext() {
     let divs = document.getElementsByClassName("tag");
@@ -57,15 +66,6 @@ function generateFulltext() {
 }
 
 
-function User(id, username, email, tagsId, photourl) {
-    let o = {};
-    o.id = id;
-    o.username = username;
-    o.email = email;
-    o.tagsId = tagsId;
-    o.photourl = photourl;
-    return o;
-}
 
 function checkAni() {
     let cta = document.getElementById("cta");
@@ -85,6 +85,8 @@ function checkAni() {
 
 }
 */
+
+
 /**
  * check whether there exists a curUser, if yes, return true; else false;
  * @returns {boolean}
