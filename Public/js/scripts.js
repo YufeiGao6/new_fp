@@ -621,7 +621,7 @@ function loadTags(hotness) {
 
         function spiral(i, callback) {
             angle = config.spiralResolution * i;
-            x = (1 + angle) * Math.cos(angle) * 2.2 - 45;
+            x = (1 + angle) * Math.cos(angle) * 2.1 - 20;
             y = (1 + angle) * Math.sin(angle) - 100;
             return callback ? callback() : null;
         }
