@@ -1,4 +1,47 @@
 
+.fulltext{
+	background-color: transparent;
+	position: absolute;
+	box-sizing: border-box;
+	z-index: 1;
+	transition: all 0.5s ease-in-out;
+	opacity: 0;
+}
+
+.fulltext2{
+	background: #a8b5e0;
+	position: absolute;
+	box-sizing: border-box;
+	z-index: 1;
+	bottom:0;
+	transition: all 0.5s ease-in-out;
+	height:150px;
+}
+
+.fulltext:hover{
+	z-index: 10000;
+}
+
+.fulltext2:hover{
+	z-index: 10000;
+}
+
+.fulltext-btn {
+	position: absolute;
+	color: #898989;
+	outline: none;
+	cursor: pointer;
+	z-index: 10;
+	background: transparent;
+	border: none;
+}
+
+.fulltext-btn:hover{
+	color: #201f53;
+}
+
+
+
 /**********create post style**********/
 .wrapper {
 	display: none;
@@ -15,7 +58,7 @@
 .login-text {
 	width: 600px;
 	height:380px;
-	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+	background-image: linear-gradient(120deg, #1f54b4 0%, #ebedee 100%);
 	position: absolute;
 	top: -300px;
 	box-sizing: border-box;
@@ -28,7 +71,7 @@
 .login-text2 {
 	width: 600px;
 	height:350px;
-	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+	background-image: linear-gradient(120deg, #3d5efd 0%, #ebedee 100%);
 	position: absolute;
 	top: 0px;
 	box-sizing: border-box;
@@ -161,6 +204,7 @@ body {
 	animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 	transform-origin: 32px 32px;
 }
+
 .lds-roller div:after {
 	content: " ";
 	display: block;
@@ -624,8 +668,18 @@ hr{
 	font-size: 10px;
 }
 
+.tag{
+	overflow: hidden;
+}
+
+.tag2{
+
+
+}
+
 .tag:hover {
 	cursor: default;
+
 }
 
 i {

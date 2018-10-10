@@ -1,4 +1,62 @@
 
+function generateFulltext() {
+    let divs = document.getElementsByClassName("tag");
+    let container = document.getElementsByClassName("container");
+
+    for (let i = 0; i < divs.length; i++) {
+        let fulltext = document.createElement("div");
+        let fulltextbtn = document.createElement("button");
+        let icon = document.createElement("i");
+
+        fulltext.className = "fulltext";
+        fulltext.id = "full-text" + i;
+        fulltextbtn.id = "fulltext-btn" + i;
+        fulltextbtn.className = "fulltext-btn";
+        icon.className = "fas fa-plus";
+
+
+        divs[i].appendChild(fulltext);
+        fulltext.appendChild(fulltextbtn);
+        fulltextbtn.appendChild(icon);
+        fulltext.style.width = divs[i].clientWidth + "px";
+        fulltext.style.height = divs[i].clientHeight + "px";
+        let curHeight = divs[i].clientHeight + "px";
+
+        fulltextbtn.style.left = (divs[i].clientWidth - 20) + "px";
+        fulltext.style.bottom = (13 - divs[i].clientHeight) + "px";
+
+        let temp = document.getElementById("full-text" + i);
+        let btn = document.getElementById("fulltext-btn" + i);
+
+        btn.onclick = function () {
+            if (temp.className === "fulltext") {
+                temp.className = "fulltext2";
+                divs[i].style.height = "200px";
+                temp.style.height = "200px";
+                fulltext.style.bottom = 0 + "px";
+                icon.className = "fas fa-minus";
+            }
+            else {
+                temp.className = "fulltext";
+                divs[i].style.height = curHeight;
+                temp.style.height = curHeight;
+                fulltext.style.bottom = (13 - divs[i].clientHeight) + "px";
+                icon.className = "fas fa-plus";
+
+            }
+        };
+
+        container[i].onmouseover = function(){
+            fulltext.style.opacity = "1";
+        };
+
+        container[i].onmouseleave = function(){
+            fulltext.style.opacity = "0";
+        };
+    }
+}
+
+
 
 function checkAni() {
     let cta = document.getElementById("cta");
@@ -124,6 +182,7 @@ window.onload = function () {
         }
     }());
     loadTags("score");
+    setTimeout(function(){ generateFulltext()}, 3000);
 };
 
 //function to hide/show te password
@@ -366,7 +425,7 @@ function loadTags(hotness) {
             tagContainer.style.backgroundColor = randomColor();
             tagContainer.onmouseover = function(){
                 tagContainer.style.transform = "scale("+ (5/freq + 1) +")";
-                container.style.zIndex = "1";
+                container.style.zIndex = "1000";
             };
             tagContainer.onmouseout = function(){
                 tagContainer.style.transform = "scale(1)";
@@ -376,6 +435,7 @@ function loadTags(hotness) {
             dateDiv.innerText = date;
             dateDiv.style.fontSize = freq*0.7 +"px";
             dateDiv.style.color = "grey";
+
 
             let xhr = new XMLHttpRequest();
             xhr.open("post", "/getUsernameById");
@@ -512,10 +572,12 @@ function loadTags(hotness) {
             likeSpan.style.lineHeight = 2 * freq + "px";
             bigDiv.appendChild(likeSpan);
             bigDiv.style.paddingTop = "5px";
+
             tagContainer.appendChild(bigDiv);
             tagContainer.appendChild(contentContainer);
 
             container.appendChild(tagContainer);
+
             return container;
         }
 
@@ -523,7 +585,6 @@ function loadTags(hotness) {
             cloud.appendChild(word);
             word.style.left = x - word.offsetWidth/2 + "px";
             word.style.top = y - word.offsetHeight/2 + "px";
-
             wordsDown.push(word.getBoundingClientRect());
         }
 
@@ -589,8 +650,6 @@ function loadTags(hotness) {
                 load.className = "loader2";
             }
         })();
-
-        /* ======================= WHEW. THAT WAS FUN. We should do that again sometime ... ======================= */
     }
     return tags;
 }
