@@ -1,10 +1,53 @@
+/**********full text style********/
+.fulltext{
+	background-color: transparent;
+	position: absolute;
+	box-sizing: border-box;
+	z-index: 1;
+	transition: all 0.5s ease-in-out;
+	opacity: 0;
+}
+
+.fulltext2{
+	background: #a8b5e0;
+	position: absolute;
+	box-sizing: border-box;
+	z-index: 1;
+	bottom:0;
+	transition: all 0.5s ease-in-out;
+	height:150px;
+}
+
+.fulltext:hover{
+	z-index: 10000;
+}
+
+.fulltext2:hover{
+	z-index: 10000;
+}
+
+.fulltext-btn {
+	position: absolute;
+	color: #898989;
+	outline: none;
+	cursor: pointer;
+	z-index: 10;
+	background: transparent;
+	border: none;
+}
+
+.fulltext-btn:hover{
+	color: #201f53;
+}
+
+
 
 /**********create post style**********/
 .wrapper {
 	display: none;
 	position: absolute;
 	width: 600px;
-	height: 400px;
+	height: 450px;
 	box-shadow: 2px 18px 70px 0px #9D9D9D;
 	overflow: hidden;
 	z-index: 100;
@@ -27,7 +70,7 @@
 
 .login-text2 {
 	width: 600px;
-	height:350px;
+	height:400px;
 	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 	position: absolute;
 	top: 0px;
@@ -136,8 +179,14 @@ body {
 }
 
 .swal-button {
-  border-radius: 1px;
-  background-color: rgba(138, 174, 218, 0.7);
+	border-radius: 1px;
+	background-color: white;
+	color:#142c59;
+}
+
+.swal-button:hover{
+	background-color: #142c59;
+	color:white;
 }
 
 
@@ -155,6 +204,7 @@ body {
 	animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 	transform-origin: 32px 32px;
 }
+
 .lds-roller div:after {
 	content: " ";
 	display: block;
@@ -618,6 +668,15 @@ hr{
 	font-size: 10px;
 }
 
+.tag{
+	overflow: hidden;
+}
+
+.tag2{
+
+
+}
+
 .tag:hover {
 	cursor: default;
 }
@@ -643,7 +702,71 @@ i {
 .create-control{
 	margin-left: 185px;
 	margin-top: 25px;
+}
 
+
+/**
+ * Checkbox Five
+ */
+.checkboxFive {
+	width: 25px;
+	margin: 20px 145px;
+	position: relative;
+	transform: scale(0.7);
+}
+
+/**
+ * Create the box for the checkbox
+ */
+.checkboxFive label {
+	cursor: pointer;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 0;
+	left: 0;
+	background: white;
+	border:1px solid #ddd;
+}
+
+/**
+ * Display the tick inside the checkbox
+ */
+.checkboxFive label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 6px;
+	left: 7px;
+	border: 3px solid #333;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+/**
+ * Create the hover event of the tick
+ */
+.checkboxFive label:hover::after {
+	opacity: 0.5;
+}
+
+/**
+ * Create the checkbox state for the tick
+ */
+.checkboxFive input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.anonymous{
+	margin-top: -34px;
+	margin-left: 175px;
+	margin-bottom: -10px;
+	font-size: 14px;
 }
 
 /************about page style***************/
@@ -654,7 +777,7 @@ i {
 .about-header{
     font-size: 30px;
     margin-top: 15px;
-    margin-left: 180px;
+    margin-left: 195px;
 
 }
 /**********word could style************/
@@ -663,11 +786,7 @@ body, html{
 	background-color: white;
     margin: 0;
     padding: 0;
-
-
-
 }
-
 
 /**********header style************/
 header {
@@ -678,63 +797,10 @@ header {
 	vertical-align: center;
 	z-index: 5;
 	height: 50px;
-	animation: 0.1s fadeInDown 0s forwards;
     width: 100%;
 	opacity: 0.8;
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
 
 /**********nav button style*******/
 .nav-btn{
@@ -788,28 +854,6 @@ header {
 	margin-right: 10px;
 	border-top: 5px;
 	/* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) */
-}
-@-webkit-keyframes fadeInBtn {
-  from {
-		opacity: 0;
-		-webkit-transform: translate3d(0, -300%, 0);
-    transform: translate3d(0, -300%, 0);
-  }
-
-  to {
-		opacity: 1;
-		-webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInBtn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 .link-btn:hover{
@@ -930,8 +974,7 @@ height:100%;
 }
 
 #shareTitle{
-	animation: 0.35s fadeInDown 0.2s forwards;
-	opacity: 0;
+	opacity: 1;
 	font: 20px 'Times New Roman', cursive;
 	color: black;
 	padding-left: 150px;

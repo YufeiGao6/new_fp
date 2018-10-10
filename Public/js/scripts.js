@@ -1,3 +1,62 @@
+
+function generateFulltext() {
+    let divs = document.getElementsByClassName("tag");
+    let container = document.getElementsByClassName("container");
+
+    for (let i = 0; i < divs.length; i++) {
+        let fulltext = document.createElement("div");
+        let fulltextbtn = document.createElement("button");
+        let icon = document.createElement("i");
+
+        fulltext.className = "fulltext";
+        fulltext.id = "full-text" + i;
+        fulltextbtn.id = "fulltext-btn" + i;
+        fulltextbtn.className = "fulltext-btn";
+        icon.className = "fas fa-plus";
+
+
+        divs[i].appendChild(fulltext);
+        fulltext.appendChild(fulltextbtn);
+        fulltextbtn.appendChild(icon);
+        fulltext.style.width = divs[i].clientWidth + "px";
+        fulltext.style.height = divs[i].clientHeight + "px";
+        let curHeight = divs[i].clientHeight + "px";
+
+        fulltextbtn.style.left = (divs[i].clientWidth - 20) + "px";
+        fulltext.style.bottom = (13 - divs[i].clientHeight) + "px";
+
+        let temp = document.getElementById("full-text" + i);
+        let btn = document.getElementById("fulltext-btn" + i);
+
+        btn.onclick = function () {
+            if (temp.className === "fulltext") {
+                temp.className = "fulltext2";
+                divs[i].style.height = "200px";
+                temp.style.height = "200px";
+                fulltext.style.bottom = 0 + "px";
+                icon.className = "fas fa-minus";
+            }
+            else {
+                temp.className = "fulltext";
+                divs[i].style.height = curHeight;
+                temp.style.height = curHeight;
+                fulltext.style.bottom = (13 - divs[i].clientHeight) + "px";
+                icon.className = "fas fa-plus";
+
+            }
+        };
+
+        container[i].onmouseover = function(){
+            fulltext.style.opacity = "1";
+        };
+
+        container[i].onmouseleave = function(){
+            fulltext.style.opacity = "0";
+        };
+    }
+}
+
+
 function User(id, username, email, tagsId, photourl) {
     let o = {};
     o.id = id;
@@ -71,11 +130,15 @@ window.onload = function () {
         sortByTime.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("time");
+            setTimeout(function(){ generateFulltext()}, 3000);
+            setTimeout(function(){ drag()}, 3000);
         };
 
         sortByScore.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("score");
+            setTimeout(function(){ generateFulltext()}, 3000);
+            setTimeout(function(){ drag()}, 3000);
         };
 
         btn3.onclick = function () {
@@ -140,7 +203,10 @@ window.onload = function () {
     loadTags("score");
         // showUserName();
         // checkIfLogin();
+    setTimeout(function(){ generateFulltext()}, 3000);
+    setTimeout(function(){ drag()}, 3000);
 };
+
 //function to hide/show te password
 function hideShowPsw(){
     let hide = document.getElementById("hide");
@@ -390,7 +456,7 @@ function loadTags(hotness) {
             tagContainer.style.backgroundColor = randomColor();
             tagContainer.onmouseover = function(){
                 tagContainer.style.transform = "scale("+ (5/freq + 1) +")";
-                container.style.zIndex = "1";
+                container.style.zIndex = "1000";
             };
             tagContainer.onmouseout = function(){
                 tagContainer.style.transform = "scale(1)";
@@ -558,7 +624,7 @@ function loadTags(hotness) {
 
         function spiral(i, callback) {
             angle = config.spiralResolution * i;
-            x = (1 + angle) * Math.cos(angle) * 2.2 - 45;
+            x = (1 + angle) * Math.cos(angle) * 2.1 - 20;
             y = (1 + angle) * Math.sin(angle) - 100;
             return callback ? callback() : null;
         }
@@ -618,8 +684,6 @@ function loadTags(hotness) {
                 load.className = "loader2";
             }
         })();
-
-        /* ======================= WHEW. THAT WAS FUN. We should do that again sometime ... ======================= */
     }
     return tags;
 }
@@ -761,5 +825,47 @@ function QuerySearch(url){
         resultArray.push(arr[i].split('=')[1]);
     }
     return resultArray;
+}
+
+function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    elmnt.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+function drag() {
+    let divs = document.getElementsByClassName("container");
+    for (let i = 0; i < divs.length; i++){
+        dragElement(divs[i]);
+    }
 }
 
