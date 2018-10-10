@@ -1,4 +1,3 @@
-
 function User(id, username, email, tagsId, photourl) {
     let o = {};
     o.id = id;
@@ -15,6 +14,22 @@ function User(id, username, email, tagsId, photourl) {
  */
 function checkCurUser() {
     return !JSON.parse(sessionStorage.getItem('user') === null);
+}
+if(window.location.href.includes("?")) {
+    let paraArray = QuerySearch(window.location.search);
+    let curUserTokenId = paraArray[0];
+    let curUserId = paraArray[1];
+    let curUsername = paraArray[2];
+    let curUseremail = paraArray[3];
+    let curUserphotourl = paraArray[4];
+    let curUser = User(curUserId, curUsername, curUseremail, [], curUserphotourl);
+
+    sessionStorage.setItem("user", JSON.stringify(curUser));
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("post", "/auth");
+    xhr.send(curUserTokenId);
+
 }
 
 window.onload = function () {
@@ -147,8 +162,8 @@ function login() {
             let sentBackUser = obj.user;
             let curUser = User(sentBackUser._id, sentBackUser.username, sentBackUser.email, sentBackUser.tagsId, sentBackUser.photo_url);;
             window.sessionStorage.setItem('user', JSON.stringify(curUser));
+            showLogInStatus();
         }
-        showLogInStatus();
     }
 }
 function logOut(){
@@ -167,7 +182,7 @@ function showLogOutStatus() {
         let model = document.getElementById('log-page');
         model.style.display = "block";
     };
-    location.reload();
+    window.location.href = "index.html";
 }
 
 function showLogInStatus() {
@@ -618,4 +633,18 @@ $(document).ready(function() {
         tonesStyle: "radio"});
 });
 
+/**
+ * parse the parameter of the url
+ * @param url
+ * @returns {*}
+ * @constructor
+ */
+function QuerySearch(url){
+    let arr = url.split('?')[1].split('&');
+    let resultArray = [];
+    for(let i = 0; i < arr.length; i++) {
+        resultArray.push(arr[i].split('=')[1]);
+    }
+    return resultArray;
+}
 
