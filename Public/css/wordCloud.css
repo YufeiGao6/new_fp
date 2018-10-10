@@ -23,6 +23,9 @@ body, html, p {
   animation: 0.55s bling 0.1s forwards;
   opacity: 0;
   border-radius: 5px;
+  -moz-box-shadow:0px 4px 15px #C2C2C2;
+  -webkit-box-shadow:0px 4px 15px #C2C2C2;
+  box-shadow:0px 4px 15px #C2C2C2;
 }
 
 .tag:hover {
