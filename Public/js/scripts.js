@@ -34,6 +34,7 @@ function checkCurUser() {
     return !JSON.parse(sessionStorage.getItem('user') === null);
 }
 if(window.location.href.includes("?")) {
+    alert("sdfdsf");
     let paraArray = QuerySearch(window.location.search);
     let curUserTokenId = paraArray[0];
     let curUserId = paraArray[1];

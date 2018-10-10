@@ -178,7 +178,7 @@ let server = http.createServer (function (req, res) {
                                                      pass: 'babamen126'
                                                  }
                                              });
-                                             let emailHtml = "http://localhost:8080" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
+                                             let emailHtml = "http://localhost:8080/index.html" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
                                              let mailOptions = {
                                                  from: 'teambabamen@126.com',
                                                  to: 'xuda980520@gmail.com',
