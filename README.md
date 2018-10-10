@@ -14,6 +14,13 @@ The users' messages will appear on the screen as sticky posts. The only thing th
 Want to know the most popular topics among friends? The more "like" a post gets, the larger font the post gets. This feature lets users know the hottest topics easily.
 
 
+
+![](./Images/Drag.gif)
+![](../Images/createPage.png)
+![](/Images/userPage.png)
+
+
+
 ## Technical Achievements
 - **Tech Achievement 1**: Email verification for signing up.   
 - **Tech Achievement 3**: Password encryption.  
@@ -27,10 +34,13 @@ Want to know the most popular topics among friends? The more "like" a post gets,
 - **Design Achievement 3**: Changed color scheme to gray and white style.  
 - **Design Achievement 4**: Added animations for signing up, creating new post, and other actions.  
 - **Design Achievement 5**: Added user's profile photo and username on the post.  
-- **Design Achievement 6**: Email!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
-
+- **Design Achievement 6**: Email吴禹辛  
+- **Design Achievement 7**: One post is limited to 140 words.  
+- **Design Achievement 8**: Background Animation吴禹辛  
 
 Reference:
 Word Cloud: https://codepen.io/stevn/pen/JdwNgw  
 Emoji Picker: https://github.com/mervick/emojionearea  
 Draggable HTML Element: https://www.w3schools.com/howto/howto_js_draggable.asp  
+Sweet Alert: https://sweetalert.js.org/
+Logo Maker: https://brandmark.io/
