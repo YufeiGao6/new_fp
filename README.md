@@ -14,6 +14,13 @@ The users' messages will appear on the screen as sticky posts. The only thing th
 Want to know the most popular topics among friends? The more "like" a post gets, the larger font the post gets. This feature lets users know the hottest topics easily.
 
 
+
+![](./Images/Drag.gif)
+![](../Images/createPage.png)
+![](/Images/createPage.png)
+
+
+
 ## Technical Achievements
 - **Tech Achievement 1**: Email verification for signing up.   
 - **Tech Achievement 3**: Password encryption.  
@@ -34,3 +41,5 @@ Reference:
 Word Cloud: https://codepen.io/stevn/pen/JdwNgw  
 Emoji Picker: https://github.com/mervick/emojionearea  
 Draggable HTML Element: https://www.w3schools.com/howto/howto_js_draggable.asp  
+Sweet Alert: https://sweetalert.js.org/
+Logo Maker: https://brandmark.io/
