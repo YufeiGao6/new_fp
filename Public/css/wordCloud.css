@@ -12,19 +12,17 @@ body, html, p {
 .container{
   word-wrap:break-word;
   min-width: 150px;
-  max-width: 250px;
   position: absolute;
 }
 
 .tag{
   max-width: 250px;
-  border: 0px solid black;
   margin: 10px;
   background-color: white;
   z-index: 0;
   animation: 0.55s bling 0.1s forwards;
   opacity: 0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .tag:hover {
@@ -41,7 +39,6 @@ body, html, p {
 
 .content{
   word-wrap: break-word;
-  max-width: 250px;
   border: 0 solid black;
   line-height: 1.1em;
   margin: 0 5px 0 5px;
@@ -86,4 +83,22 @@ body, html, p {
 
 #outer{
   margin-top: 50px;
+}
+
+.photo {
+  border-radius: 50%;
+  width: 20px;
+}
+
+.photoSpan{
+  padding-left: 5px;
+  float: left;
+  display: inline-block;
+}
+
+.likeSpan{
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+  display: inline-block;
 }

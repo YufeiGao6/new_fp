@@ -277,9 +277,9 @@ function loadTags(hotness) {
         let pink = "#e0cdcf";
         let purple = "#c9c0d3";
         let blue = "#c1cbd7";
-        let grey = "#ececea";
+        let gray = "#ececea";
 
-        let colors = [yellow, green, mint, blue, grey, milk, pink, purple];
+        let colors = ["white","lightgray",gray, milk];
         function randomColor() {
             let index = Math.floor((Math.random()*colors.length));
             return colors[index];
@@ -335,7 +335,7 @@ function loadTags(hotness) {
                 freq = date.valueOf()/100000000000;
             }
             else{
-                freq = 1.2*score+12;
+                freq = 0.8*score+14;
             }
 
             let month = date.getMonth()+1;
@@ -345,16 +345,19 @@ function loadTags(hotness) {
             date = month+"/"+day+"-"+time;
 
             let likeUserIds = tag.likeUserIds;
-            let dateContainer = document.createElement("span");
-            let likeSubCon = document.createElement("span");
             let container = document.createElement("div");
             let tagContainer = document.createElement("div");
-            let likeContainer = document.createElement("div");
-            let authorContainer = document.createElement("div");
             let contentContainer = document.createElement("div");
             let likeButton = document.createElement("button");
             let post = document.createElement("p");
-            let hr = document.createElement("hr");
+
+            let bigDiv = document.createElement("div");
+            let photoSpan = document.createElement("span");
+            let photo = document.createElement("img");
+            let midSpan = document.createElement("span");
+            let nameDiv = document.createElement("div");
+            let dateDiv = document.createElement("div");
+            let likeSpan = document.createElement("span");
 
             container.className = "container";
             container.id = id;
@@ -370,12 +373,15 @@ function loadTags(hotness) {
                 container.style.zIndex = "0";
             };
 
-            dateContainer.innerText = date;
+            dateDiv.innerText = date;
+            dateDiv.style.fontSize = freq*0.7 +"px";
+            dateDiv.style.color = "grey";
 
             let xhr = new XMLHttpRequest();
             xhr.open("post", "/getUsernameById");
             xhr.send(authorId);
             let authorName = "";
+            let photoUrl = "";
             xhr.onreadystatechange = handle_res;
             function handle_res() {
                 if (this.readyState !== 4) {
@@ -388,17 +394,28 @@ function loadTags(hotness) {
 
                 if(sentBackObj){
                     authorName = sentBackObj.username;
-                    authorContainer.innerText = "Author: "+authorName;
+                    nameDiv.innerText = authorName;
+                    photoUrl = sentBackObj.photo_url;
+                    photo.src = photoUrl;
+                    photo.className = "photo";
+                    photo.style.width = freq+5 + "px";
+                    photoSpan.appendChild(photo);
+                    photoSpan.className = "photoSpan";
                 }
                 else{
-                    authorContainer.innerText = "Author: Anonymous";
+                    nameDiv.innerText = "Anonymous";
                 }
-                authorContainer.style.fontSize = freq*0.8 +"px";
-                authorContainer.style.marginLeft = "5px";
-                authorContainer.style.marginBottom = "5px";
-                authorContainer.style.color = "grey";
-                authorContainer.style.fontFamily = "Helvetica";
+                nameDiv.style.fontSize = freq*0.8 +"px";
+                nameDiv.style.fontFamily = "Helvetica";
+
+                midSpan.appendChild(nameDiv);
+                midSpan.appendChild(dateDiv);
+                midSpan.className = "photoSpan";
+
             }
+            bigDiv.appendChild(photoSpan);
+            bigDiv.appendChild(midSpan);
+
 
             if (checkCurUser()){ // user logged in
                 if(likeUserIds.includes(userId)){
@@ -415,10 +432,9 @@ function loadTags(hotness) {
                     if (like.className === "unlikeButton") {
                         likeButton.className = "likeButton";
                         score = score+1;
-                        likeSubCon.innerText = score;
-                        likeSubCon.appendChild(likeButton);
-                        likeContainer.appendChild(likeSubCon);
-                        likeContainer.appendChild(dateContainer);
+                        likeSpan.innerText = score;
+                        likeSpan.style.fontSize = freq*0.8 + "px";
+                        likeSpan.appendChild(likeButton);
                         // db把当前user加进当前tag的likeUserIds
                         let likeData = {};
                         likeData['userId'] = userId;
@@ -441,10 +457,8 @@ function loadTags(hotness) {
                     }else {
                         likeButton.className = "unlikeButton";
                         score = score-1;
-                        likeSubCon.innerText = score;
-                        likeSubCon.appendChild(likeButton);
-                        likeContainer.appendChild(likeSubCon);
-                        likeContainer.appendChild(dateContainer);
+                        likeSpan.innerText = score;
+                        likeSpan.appendChild(likeButton);
                         // db把当前user移出当前tag的likeUserIds
                         let unlikeData = {};
                         unlikeData['userId'] = userId;
@@ -477,18 +491,15 @@ function loadTags(hotness) {
                 }
             }
 
-            likeSubCon.innerText = score;
-            likeSubCon.appendChild(likeButton);
-            likeContainer.appendChild(likeSubCon);
-            likeContainer.appendChild(dateContainer);
-            likeSubCon.style.fontFamily = "Helvetica";
-            likeContainer.className = "like";
-            likeContainer.style.fontFamily = "Helvetica";
-            dateContainer.style.fontFamily = "Helvetica";
-            dateContainer.style.fontSize = freq*0.7 + "px";
-            dateContainer.style.paddingTop = 3 + "px";
-            likeContainer.style.fontSize = freq + "px";
-            likeContainer.style.padding = freq/5 + "px";
+            likeSpan.innerText = score;
+            likeSpan.appendChild(likeButton);
+
+            likeSpan.style.fontSize = freq + "px";
+            likeSpan.className = "likeSpan";
+
+            let width = parseInt(midSpan.style.width) + parseInt(likeSpan.style.width) + 50;
+
+            container.style.maxWidth = width + "px";
 
             post.innerText = word;
 
@@ -497,9 +508,11 @@ function loadTags(hotness) {
             contentContainer.style.fontSize = freq + "px";
             contentContainer.style.padding = freq/5 + "px";
 
-            tagContainer.appendChild(likeContainer);
-            tagContainer.appendChild(authorContainer);
-            //tagContainer.appendChild(hr);
+            bigDiv.style.height = 2*freq + "px";
+            likeSpan.style.lineHeight = 2 * freq + "px";
+            bigDiv.appendChild(likeSpan);
+            bigDiv.style.paddingTop = "5px";
+            tagContainer.appendChild(bigDiv);
             tagContainer.appendChild(contentContainer);
 
             container.appendChild(tagContainer);
