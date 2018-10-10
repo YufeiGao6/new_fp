@@ -19,8 +19,6 @@ function checkAni() {
 }
 
 
-
-
 function User(id, username, email, tagsId, photourl) {
     let o = {};
     o.id = id;
