@@ -22,6 +22,11 @@ function createUser() {
         document.getElementById("msg").innerHTML = "Please input email!";
         return;
     }
+
+    if(!validateEmail(email)) {
+        document.getElementById("msg").innerHTML = "Please correct your email format!";
+        return;
+    }
     if(password === "") {
         document.getElementById("msg").innerHTML = "Please input password!";
         return;
@@ -78,4 +83,9 @@ function checkPassword(){
         button.disabled = false;
         return psw2;
     }
+}
+
+function validateEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
