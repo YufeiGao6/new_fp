@@ -360,7 +360,7 @@ function loadTags(hotness) {
         };
 
         let blue = "#d0dbe8";
-        let blue2 = "#dfefff";
+        let blue2 = "#dcecfc";
         let blue3 = "#dee6ed";
         let gray = "#ececea";
         let gray2 = "#e5e6e8";
