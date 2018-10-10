@@ -107,7 +107,7 @@ function loadTagsDB() {
                     swal({
                         title: "Your Change Has Been Saved", 
                         icon: "success",
-                        button: "Yeah",
+                        button: "Ok",
                         closeOnClickOutside: false
                     });
                 }

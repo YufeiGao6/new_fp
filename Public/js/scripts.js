@@ -130,11 +130,13 @@ window.onload = function () {
         sortByTime.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("time");
+            setTimeout(function(){ generateFulltext()}, 3000);
         };
 
         sortByScore.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("score");
+            setTimeout(function(){ generateFulltext()}, 3000);
         };
 
         btn3.onclick = function () {
