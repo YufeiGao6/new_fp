@@ -358,7 +358,7 @@ function loadTags(hotness) {
         let yellow = "#f8ebd8";
         let green = "#b5c4b1";
         let mint = "#e0e5df";
-        let milk = "#fffaf4";
+        let milk = "#dee6ed";
         let pink = "#e0cdcf";
         let purple = "#c9c0d3";
         let blue = "#c1cbd7";

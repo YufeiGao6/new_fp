@@ -9,7 +9,7 @@ i {
 }
 
 .swal-overlay{
-	background-color: rgba(219, 219, 219, 0.7)
+	background-color: rgba(175, 175, 175, 0.7)
 }
 
 .swal-button {
@@ -112,12 +112,14 @@ header {
     float: left;
     width:300px;
     height: 420px;
-    background-color: #fff;
-    margin: 40px 50px 0px;
-    box-shadow: 0 2px 6px rgba(137, 137, 137, 0.08);
+    background-color:white;
     border-radius: 8px;
+    border:1px;
     overflow: hidden;
-    transition: box-shadow .25s ease,transform .25s ease;
+    margin: 20px 50px 30px;
+    -moz-box-shadow:0px 4px 15px #C2C2C2;
+    -webkit-box-shadow:0px 4px 15px #C2C2C2;
+    box-shadow:0px 4px 15px #C2C2C2;
 }
 
 .tag-container{
@@ -205,7 +207,9 @@ header {
 }
 
 #Welcome{
-    color: #152f5a;
+    font: 16px Montserrat;
+    color: black;
+    font-weight: bold;
     margin-top: -30px;
     padding-top: -30px;
 }
@@ -237,6 +241,3 @@ hr.style-one {
     color: black;
 }
 
-.container {
-    margin-top: 5px;
-}
