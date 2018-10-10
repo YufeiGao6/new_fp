@@ -278,8 +278,10 @@ function loadTags(hotness) {
         let purple = "#c9c0d3";
         let blue = "#c1cbd7";
         let gray = "#ececea";
+        let gray2 = "#e5e6e8";
+        let gray3 = "#f2f2f2";
 
-        let colors = ["white","lightgray",gray, milk];
+        let colors = ["white","lightgray",gray, milk, gray2, gray3];
         function randomColor() {
             let index = Math.floor((Math.random()*colors.length));
             return colors[index];
@@ -565,7 +567,7 @@ function loadTags(hotness) {
         (function placeWords() {
             let length = tags.length;
             if (tags.length>20){
-                length = 20
+                length = 20;
             }
             for (var i = 0; i < length; i += 1) {
 
