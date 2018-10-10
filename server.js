@@ -5,12 +5,14 @@ let http = require('http')
   , path = require('path')
   , emoji = require('node-emoji')
   , mongoose = require('mongoose')
-    , md5 = require('js-md5')
+  , nodemailer = require('nodemailer')
+  , md5 = require('js-md5')
   , port = 8080;
 
 // data fields:
 let dataSet = [];
 let mongoUrl = "mongodb://heroku_wxgxxz0f:9s9gbag43mg230gm92eu9c0hvm@ds117773.mlab.com:17773/heroku_hxnljp4s";
+
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true
 });
@@ -23,7 +25,6 @@ mongoose.connection.on('error',function (err) {
 mongoose.connection.on('disconnected', function () {
     console.log('Mongoose connection disconnected');
 });
-
 let userSchema = new mongoose.Schema({
     username: String,
     password: String,
@@ -36,12 +37,17 @@ let tagSchema = new mongoose.Schema({
     score: Number,
     content: String,
     date: Date,
-    likeUserIds: Array
+    likeUserIds: Array,
+    anonymous: Boolean
 });
-
+let userAuthSchedma = new mongoose.Schema({
+    userId: String,
+    tokenId: String,
+    authOrNot: Boolean
+});
 let User = mongoose.model("User", userSchema);
 let Tag = mongoose.model("Tag", tagSchema);
-
+let Auth = mongoose.model("Auth", userAuthSchedma);
 let user1 = new User({
     username: 'shabi',
     password: "sssss",
@@ -49,13 +55,18 @@ let user1 = new User({
     tagIds: [],
     photo_url: "sdfdsf"
 });
-
 let tag1 = new Tag({
     authorId: '5bae568b134c661f3c90107f',
     score: 10,
     content: 'gdhajhjdagd',
     date: '2016-05-18T16:00:00Z',
-    likeUserIds: ['5bae568b134c661f3c90107f']
+    likeUserIds: ['5bae568b134c661f3c90107f'],
+    anonymous: false
+});
+let auth = new Auth({
+    userId: '5bb660482d27d60015e582aa',
+    tokenId: '34534534ert2345',
+    authOrNot: false
 });
 
 let server = http.createServer (function (req, res) {
@@ -138,21 +149,54 @@ let server = http.createServer (function (req, res) {
                                   password: md5(createPassword),
                                   email: createEmail,
                                   tagIds: [],
-                                  photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png"
+                                  photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png",
                               });
-                              curUser.save(function (err, res) {
+                              curUser.save(function (err, response) {
                                   if (err) {
                                       console.log("Something wrong happens with database!");
                                   } else {
                                       console.log("Successfully insert the user into database！");
+                                      let curUserAuth = new Auth({
+                                          userId: curUser._id,
+                                          tokenId: guid(),
+                                          authOrNot: false
+                                      });
+                                      curUserAuth.save(function (err, response){
+                                         if(err) {
+                                             console.log("Something wrong happens with database!");
+                                         } else {
+                                             console.log("Successfully insert the user Auth into database！");
+                                             //window.location.href="index.html";
+                                             console.log("User email: " + curUser.email);
+                                             console.log("User id: " + curUser._id);
+                                             console.log("User photo url: " + curUser.photo_url);
+                                             console.log("Auth: " + curUserAuth._id);
+                                             let transporter = nodemailer.createTransport({
+                                                 service: '126',
+                                                 auth: {
+                                                     user: 'teambabamen@126.com',
+                                                     pass: 'babamen126'
+                                                 }
+                                             });
+                                             let emailHtml = "http://localhost:8080/index.html" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
+                                             let mailOptions = {
+                                                 from: 'teambabamen@126.com',
+                                                 to: 'xuda980520@gmail.com',
+                                                 subject: 'Thanks for register!',
+                                                 html: "<p>Our social media application called Sticky Post, which allows users to leave messages and share feelings with friends, families or colleagues.</p>" + "<a href='"+emailHtml+"'>Click Me To Activate Your Account</a>"
+                                             };
+                                             transporter.sendMail(mailOptions, function(error, info){
+                                                 if (error) {
+                                                     console.log(error);
+                                                 } else {
+                                                     console.log('Email sent: ' + info.response);
+                                                 }
+                                             });
+                                         }
+                                      });
+                                      res.end(succsMsg + "," + curUser._id + "," + curUser.photo_url + "," + curUserAuth.tokenId);
                                   }
                               });
-                              //window.location.href="index.html";
-                              console.log(curUser.email);
-                              console.log(curUser._id);
-                              console.log(curUser.photo_url);
-                              console.log(curUser.email);
-                              res.end(succsMsg + "," + curUser._id + "," + curUser.photo_url);
                           }
                       });
                   }
@@ -172,13 +216,15 @@ let server = http.createServer (function (req, res) {
               let content = obj.content;
               let date = obj.date;
               let likeUserIds = obj.likeUserIds;
+              let anonymous = obj.anonymous;
 
               let data = new Tag({
                   authorId: authorId,
                   score: score,
                   content: content,
                   date: date,
-                  likeUserIds: likeUserIds
+                  likeUserIds: likeUserIds,
+                  anonymous: anonymous
               });
               data.save(function(err, a) {
                   if(err) {
@@ -210,7 +256,16 @@ let server = http.createServer (function (req, res) {
                           sentBackString = "Successfully login";
                           sentBackObj['sentBackMsg'] = sentBackString;
                           sentBackObj['user'] = user;
-                          res.end(JSON.stringify(sentBackObj));
+                          Auth.findOne({userId: user._id}, function(err, auth) {
+                             if(auth.authOrNot === false) {
+                                 sentBackObj['sentBackMsg'] = "You have not activated your account, please check your email";
+                                 sentBackObj['user'] = null;
+                                 res.end(JSON.stringify(sentBackObj));
+                             } else {
+                                 res.end(JSON.stringify(sentBackObj));
+                             }
+                          });
+
                       } else {
                           sentBackString = "Password is wrong!";
                           sentBackObj['sentBackMsg'] = sentBackString;
@@ -252,7 +307,6 @@ let server = http.createServer (function (req, res) {
                   tagIds: tagIds
               }, {multi: true}, function (err, docs) {
                   if (err) console.log(err);
-                  console.log('updated' + docs);
               });
           });
           break;
@@ -404,6 +458,20 @@ let server = http.createServer (function (req, res) {
               });
           });
           break;
+      case '/auth':
+          console.log("sdfsdf");
+          let authData = '';
+          req.on('data', function(d) {
+              authData += d;
+          });
+          req.on('end', function () {
+              Auth.updateOne({tokenId: authData}, {authOrNot: true}, function(err, docs) {
+                 if(err) {
+                     console.log(err);
+                 }
+              });
+          });
+          break;
       default:
           res.end('404 not found')
   }
@@ -415,9 +483,21 @@ console.log('listening on 8080');
 
 function sendFile(res, filename, contentType) {
   contentType = contentType || 'text/html';
-
   fs.readFile(filename, function(error, content) {
     res.writeHead(200, {'Content-type': contentType});
     res.end(content, 'utf-8')
   })
+}
+
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
+}
+
+function getToken(query) {
+    return query.split('=')[1];
 }

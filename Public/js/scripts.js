@@ -57,6 +57,15 @@ function generateFulltext() {
 }
 
 
+function User(id, username, email, tagsId, photourl) {
+    let o = {};
+    o.id = id;
+    o.username = username;
+    o.email = email;
+    o.tagsId = tagsId;
+    o.photourl = photourl;
+    return o;
+}
 
 function checkAni() {
     let cta = document.getElementById("cta");
@@ -76,23 +85,29 @@ function checkAni() {
 
 }
 
-
-function User(id, username, email, tagsId, photourl) {
-    let o = {};
-    o.id = id;
-    o.username = username;
-    o.email = email;
-    o.tagsId = tagsId;
-    o.photourl = photourl;
-    return o;
-}
-
 /**
  * check whether there exists a curUser, if yes, return true; else false;
  * @returns {boolean}
  */
 function checkCurUser() {
     return !JSON.parse(sessionStorage.getItem('user') === null);
+}
+if(window.location.href.includes("?")) {
+    alert("sdfdsf");
+    let paraArray = QuerySearch(window.location.search);
+    let curUserTokenId = paraArray[0];
+    let curUserId = paraArray[1];
+    let curUsername = paraArray[2];
+    let curUseremail = paraArray[3];
+    let curUserphotourl = paraArray[4];
+    let curUser = User(curUserId, curUsername, curUseremail, [], curUserphotourl);
+
+    sessionStorage.setItem("user", JSON.stringify(curUser));
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("post", "/auth");
+    xhr.send(curUserTokenId);
+
 }
 
 window.onload = function () {
@@ -182,6 +197,8 @@ window.onload = function () {
         }
     }());
     loadTags("score");
+        // showUserName();
+        // checkIfLogin();
     setTimeout(function(){ generateFulltext()}, 3000);
 };
 
@@ -225,15 +242,22 @@ function login() {
             let sentBackUser = obj.user;
             let curUser = User(sentBackUser._id, sentBackUser.username, sentBackUser.email, sentBackUser.tagsId, sentBackUser.photo_url);;
             window.sessionStorage.setItem('user', JSON.stringify(curUser));
+            showLogInStatus();
         }
-        showLogInStatus();
     }
 }
-
 function logOut(){
     document.getElementById("loginUsername").innerText = "";
     document.getElementById("loginPassword").innerText = "";
     sessionStorage.removeItem('user');
+    swal({
+        text: "Successfully log out",
+        button: false,
+        closeOnClickOutside: false
+    });
+
+    setTimeout(function(){ showLogOutStatus(); }, 1300);
+    // to do:
     showLogOutStatus();
 }
 
@@ -246,7 +270,7 @@ function showLogOutStatus() {
         let model = document.getElementById('log-page');
         model.style.display = "block";
     };
-    location.reload();
+    window.location.href = "index.html";
 }
 
 function showLogInStatus() {
@@ -314,6 +338,7 @@ function loadTags(hotness) {
                 content: sentBackObj[i].content,
                 date: sentBackObj[i].date,
                 likeUserIds: sentBackObj[i].likeUserIds,
+                anonymous: sentBackObj[i].anonymous
             };
             tags[i] = currentTag;
         }
@@ -386,6 +411,7 @@ function loadTags(hotness) {
             let id = tag._id;
             let authorId = tag.authorId;
             let word = tag.content;
+            let anonymous = tag.anonymous;
             let score = tag.score;
             let date = new Date(tag.date);
             let freq = 0;
@@ -436,7 +462,6 @@ function loadTags(hotness) {
             dateDiv.style.fontSize = freq*0.7 +"px";
             dateDiv.style.color = "grey";
 
-
             let xhr = new XMLHttpRequest();
             xhr.open("post", "/getUsernameById");
             xhr.send(authorId);
@@ -453,14 +478,19 @@ function loadTags(hotness) {
                 let sentBackObj = JSON.parse(this.responseText);
 
                 if(sentBackObj){
-                    authorName = sentBackObj.username;
-                    nameDiv.innerText = authorName;
-                    photoUrl = sentBackObj.photo_url;
-                    photo.src = photoUrl;
-                    photo.className = "photo";
-                    photo.style.width = freq+5 + "px";
-                    photoSpan.appendChild(photo);
-                    photoSpan.className = "photoSpan";
+                    if(anonymous){
+                        nameDiv.innerText = "Anonymous";
+                    }
+                    else{
+                        authorName = sentBackObj.username;
+                        nameDiv.innerText = authorName;
+                        photoUrl = sentBackObj.photo_url;
+                        photo.src = photoUrl;
+                        photo.className = "photo";
+                        photo.style.width = freq+5 + "px";
+                        photoSpan.appendChild(photo);
+                        photoSpan.className = "photoSpan";
+                    }
                 }
                 else{
                     nameDiv.innerText = "Anonymous";
@@ -572,12 +602,10 @@ function loadTags(hotness) {
             likeSpan.style.lineHeight = 2 * freq + "px";
             bigDiv.appendChild(likeSpan);
             bigDiv.style.paddingTop = "5px";
-
             tagContainer.appendChild(bigDiv);
             tagContainer.appendChild(contentContainer);
 
             container.appendChild(tagContainer);
-
             return container;
         }
 
@@ -585,12 +613,13 @@ function loadTags(hotness) {
             cloud.appendChild(word);
             word.style.left = x - word.offsetWidth/2 + "px";
             word.style.top = y - word.offsetHeight/2 + "px";
+
             wordsDown.push(word.getBoundingClientRect());
         }
 
         function spiral(i, callback) {
             angle = config.spiralResolution * i;
-            x = (1 + angle) * Math.cos(angle) * 2.3 + 6;
+            x = (1 + angle) * Math.cos(angle) * 2.2 - 45;
             y = (1 + angle) * Math.sin(angle) - 100;
             return callback ? callback() : null;
         }
@@ -625,8 +654,8 @@ function loadTags(hotness) {
         /* =======================  LETS GO! =======================  */
         (function placeWords() {
             let length = tags.length;
-            if (tags.length>20){
-                length = 20;
+            if (tags.length>16){
+                length = 16;
             }
             for (var i = 0; i < length; i += 1) {
 
@@ -664,6 +693,7 @@ function postTag() {
     let content = document.getElementById("tag-content").value;
     let date = new Date();
     let likeUserIds = [];
+    let anonymous = document.getElementById("checkbox").checked;
     likeUserIds.push(authorId);
 
     if (content.trim() !== "") {
@@ -673,6 +703,7 @@ function postTag() {
         data['content'] = content.toString();
         data['date'] = date;
         data['likeUserIds'] = likeUserIds;
+        data['anonymous'] = anonymous;
         let maxNum = 120;
 
         if (data['content'].length >= maxNum) {
@@ -775,3 +806,19 @@ $(document).ready(function() {
         pickerPosition: "bottom",
         tonesStyle: "radio"});
 });
+
+/**
+ * parse the parameter of the url
+ * @param url
+ * @returns {*}
+ * @constructor
+ */
+function QuerySearch(url){
+    let arr = url.split('?')[1].split('&');
+    let resultArray = [];
+    for(let i = 0; i < arr.length; i++) {
+        resultArray.push(arr[i].split('=')[1]);
+    }
+    return resultArray;
+}
+

@@ -47,7 +47,7 @@
 	display: none;
 	position: absolute;
 	width: 600px;
-	height: 400px;
+	height: 450px;
 	box-shadow: 2px 18px 70px 0px #9D9D9D;
 	overflow: hidden;
 	z-index: 100;
@@ -58,7 +58,7 @@
 .login-text {
 	width: 600px;
 	height:380px;
-	background-image: linear-gradient(120deg, #1f54b4 0%, #ebedee 100%);
+	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 	position: absolute;
 	top: -300px;
 	box-sizing: border-box;
@@ -70,8 +70,8 @@
 
 .login-text2 {
 	width: 600px;
-	height:350px;
-	background-image: linear-gradient(120deg, #3d5efd 0%, #ebedee 100%);
+	height:400px;
+	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 	position: absolute;
 	top: 0px;
 	box-sizing: border-box;
@@ -168,27 +168,21 @@ body {
 	margin-top: 30px ;
 }
 
+/***********alert style ***********/
+
 .swal-modal{
-	z-index: 999;
-	position: relative;
+	border-radius: 1px;
 }
 
 .swal-overlay{
-	/* float: left;
-	width: 100%;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover; */
-	/* -webkit-filter: blur(15px);
-	-moz-filter: blur(15px);
-	-o-filter: blur(15px);
-	-ms-filter: blur(15px); */
-	/* filter: blur(55px); */
-	z-index: 1000;
-	filter: blur(15px);
-	position: relative;
-	/* filter: grayscale(100%); */
+	background-color: rgba(253, 251, 251,0.7)
 }
+
+.swal-button {
+  border-radius: 1px;
+  background-color: rgba(138, 174, 218, 0.7);
+}
+
 
 /***********loader style ***********/
 .lds-roller {
@@ -679,7 +673,6 @@ hr{
 
 .tag:hover {
 	cursor: default;
-
 }
 
 i {
@@ -703,7 +696,71 @@ i {
 .create-control{
 	margin-left: 185px;
 	margin-top: 25px;
+}
 
+
+/**
+ * Checkbox Five
+ */
+.checkboxFive {
+	width: 25px;
+	margin: 20px 145px;
+	position: relative;
+	transform: scale(0.7);
+}
+
+/**
+ * Create the box for the checkbox
+ */
+.checkboxFive label {
+	cursor: pointer;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 0;
+	left: 0;
+	background: white;
+	border:1px solid #ddd;
+}
+
+/**
+ * Display the tick inside the checkbox
+ */
+.checkboxFive label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 6px;
+	left: 7px;
+	border: 3px solid #333;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+/**
+ * Create the hover event of the tick
+ */
+.checkboxFive label:hover::after {
+	opacity: 0.5;
+}
+
+/**
+ * Create the checkbox state for the tick
+ */
+.checkboxFive input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.anonymous{
+	margin-top: -34px;
+	margin-left: 175px;
+	margin-bottom: -10px;
+	font-size: 14px;
 }
 
 /************about page style***************/
@@ -714,7 +771,7 @@ i {
 .about-header{
     font-size: 30px;
     margin-top: 15px;
-    margin-left: 180px;
+    margin-left: 195px;
 
 }
 /**********word could style************/
@@ -897,10 +954,10 @@ header {
 
 
 .footer #button{
-	width:35px;
-	height:35px;
-	border: #898989 12px solid;
-	border-radius:35px;
+	width:20px;
+	height:20px;
+	border: #898989 8px solid;
+	border-radius:20px;
 	margin:0 auto;
 	position:relative;
 	-webkit-transition: all 0.5s ease;
@@ -910,9 +967,9 @@ header {
     transition: all 0.5s ease;
 }
 .footer #button:hover{
-	width:35px;
-	height:35px;
-	border: black 12px solid;
+	width:20px;
+	height:20px;
+	border: black 8px solid;
 	-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -925,7 +982,7 @@ header {
 	left:0;
 	position:fixed;
     width: 100%;
-    height: 2em;
+    height: 1.5em;
     overflow:hidden;
     margin:0 auto;
 	-webkit-transition: all 0.5s ease;
@@ -941,7 +998,7 @@ header {
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     transition: all 0.5s ease;
-	height: 10em;
+	height: 6em;
 }
 .footer #container{
 	margin-top:5px;
@@ -954,7 +1011,7 @@ height:100%;
 }
 .footer #cont{
 	position:relative;
-	top:-45px;
+	top:-58px;
 	right:190px;
 	width:150px;
 	height:auto;
@@ -1123,403 +1180,6 @@ height:100%;
 	box-shadow: 0 2px 0 0 #fff, inset 0 -1px 0 0 #fff
 }
 
-@media screen and (max-width: 520px) {
-	#master-container-grid .master-container-grid_item {
-			margin-bottom: 18px
-	}
-	#master-container-grid .master-container-grid_item .grid_item-overlay {
-			position: relative;
-			background: none !important;
-			color: #3a3a3a;
-			opacity: 1;
-			display: block;
-			margin-top: 18px;
-			text-align: left
-	}
-	#master-container-grid .master-container-grid_item .grid_item-overlay .link {
-			box-shadow: none;
-	}
-	#master-container-grid .master-container-grid_item .grid_item-overlay .link:hover {
-			text-decoration: none;
-	}
-}
-
-@-webkit-keyframes scroll {
-	0.0% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	3.7037037037037037% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	11.11111111111111% {
-			-webkit-transform: translateY(-66px);
-			transform: translateY(-66px)
-	}
-	14.814814814814815% {
-			-webkit-transform: translateY(-66px);
-			transform: translateY(-66px)
-	}
-	22.22222222222222% {
-			-webkit-transform: translateY(-132px);
-			transform: translateY(-132px)
-	}
-	25.925925925925927% {
-			-webkit-transform: translateY(-132px);
-			transform: translateY(-132px)
-	}
-	33.333333333333336% {
-			-webkit-transform: translateY(-198px);
-			transform: translateY(-198px)
-	}
-	37.03703703703704% {
-			-webkit-transform: translateY(-198px);
-			transform: translateY(-198px)
-	}
-	44.44444444444444% {
-			-webkit-transform: translateY(-264px);
-			transform: translateY(-264px)
-	}
-	48.148148148148145% {
-			-webkit-transform: translateY(-264px);
-			transform: translateY(-264px)
-	}
-	55.55555555555556% {
-			-webkit-transform: translateY(-330px);
-			transform: translateY(-330px)
-	}
-	59.25925925925926% {
-			-webkit-transform: translateY(-330px);
-			transform: translateY(-330px)
-	}
-	66.66666666666667% {
-			-webkit-transform: translateY(-396px);
-			transform: translateY(-396px)
-	}
-	70.37037037037037% {
-			-webkit-transform: translateY(-396px);
-			transform: translateY(-396px)
-	}
-	77.77777777777777% {
-			-webkit-transform: translateY(-462px);
-			transform: translateY(-462px)
-	}
-	81.48148148148148% {
-			-webkit-transform: translateY(-462px);
-			transform: translateY(-462px)
-	}
-	88.88888888888889% {
-			-webkit-transform: translateY(-528px);
-			transform: translateY(-528px)
-	}
-	92.5925925925926% {
-			-webkit-transform: translateY(-528px);
-			transform: translateY(-528px)
-	}
-	100.0% {
-			-webkit-transform: translateY(-594px);
-			transform: translateY(-594px)
-	}
-}
-
-@keyframes scroll {
-	0.0% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	3.7037037037037037% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	11.11111111111111% {
-			-webkit-transform: translateY(-66px);
-			transform: translateY(-66px)
-	}
-	14.814814814814815% {
-			-webkit-transform: translateY(-66px);
-			transform: translateY(-66px)
-	}
-	22.22222222222222% {
-			-webkit-transform: translateY(-132px);
-			transform: translateY(-132px)
-	}
-	25.925925925925927% {
-			-webkit-transform: translateY(-132px);
-			transform: translateY(-132px)
-	}
-	33.333333333333336% {
-			-webkit-transform: translateY(-198px);
-			transform: translateY(-198px)
-	}
-	37.03703703703704% {
-			-webkit-transform: translateY(-198px);
-			transform: translateY(-198px)
-	}
-	44.44444444444444% {
-			-webkit-transform: translateY(-264px);
-			transform: translateY(-264px)
-	}
-	48.148148148148145% {
-			-webkit-transform: translateY(-264px);
-			transform: translateY(-264px)
-	}
-	55.55555555555556% {
-			-webkit-transform: translateY(-330px);
-			transform: translateY(-330px)
-	}
-	59.25925925925926% {
-			-webkit-transform: translateY(-330px);
-			transform: translateY(-330px)
-	}
-	66.66666666666667% {
-			-webkit-transform: translateY(-396px);
-			transform: translateY(-396px)
-	}
-	70.37037037037037% {
-			-webkit-transform: translateY(-396px);
-			transform: translateY(-396px)
-	}
-	77.77777777777777% {
-			-webkit-transform: translateY(-462px);
-			transform: translateY(-462px)
-	}
-	81.48148148148148% {
-			-webkit-transform: translateY(-462px);
-			transform: translateY(-462px)
-	}
-	88.88888888888889% {
-			-webkit-transform: translateY(-528px);
-			transform: translateY(-528px)
-	}
-	92.5925925925926% {
-			-webkit-transform: translateY(-528px);
-			transform: translateY(-528px)
-	}
-	100.0% {
-			-webkit-transform: translateY(-594px);
-			transform: translateY(-594px)
-	}
-}
-
-@-webkit-keyframes scroll-mobile {
-	0.0% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	3.7037037037037037% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	11.11111111111111% {
-			-webkit-transform: translateY(-48px);
-			transform: translateY(-48px)
-	}
-	14.814814814814815% {
-			-webkit-transform: translateY(-48px);
-			transform: translateY(-48px)
-	}
-	22.22222222222222% {
-			-webkit-transform: translateY(-96px);
-			transform: translateY(-96px)
-	}
-	25.925925925925927% {
-			-webkit-transform: translateY(-96px);
-			transform: translateY(-96px)
-	}
-	33.333333333333336% {
-			-webkit-transform: translateY(-144px);
-			transform: translateY(-144px)
-	}
-	37.03703703703704% {
-			-webkit-transform: translateY(-144px);
-			transform: translateY(-144px)
-	}
-	44.44444444444444% {
-			-webkit-transform: translateY(-192px);
-			transform: translateY(-192px)
-	}
-	48.148148148148145% {
-			-webkit-transform: translateY(-192px);
-			transform: translateY(-192px)
-	}
-	55.55555555555556% {
-			-webkit-transform: translateY(-240px);
-			transform: translateY(-240px)
-	}
-	59.25925925925926% {
-			-webkit-transform: translateY(-240px);
-			transform: translateY(-240px)
-	}
-	66.66666666666667% {
-			-webkit-transform: translateY(-288px);
-			transform: translateY(-288px)
-	}
-	70.37037037037037% {
-			-webkit-transform: translateY(-288px);
-			transform: translateY(-288px)
-	}
-	77.77777777777777% {
-			-webkit-transform: translateY(-336px);
-			transform: translateY(-336px)
-	}
-	81.48148148148148% {
-			-webkit-transform: translateY(-336px);
-			transform: translateY(-336px)
-	}
-	88.88888888888889% {
-			-webkit-transform: translateY(-384px);
-			transform: translateY(-384px)
-	}
-	92.5925925925926% {
-			-webkit-transform: translateY(-384px);
-			transform: translateY(-384px)
-	}
-	100.0% {
-			-webkit-transform: translateY(-432px);
-			transform: translateY(-432px)
-	}
-}
-
-@keyframes scroll-mobile {
-	0.0% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	3.7037037037037037% {
-			-webkit-transform: translateY(0px);
-			transform: translateY(0px)
-	}
-	11.11111111111111% {
-			-webkit-transform: translateY(-48px);
-			transform: translateY(-48px)
-	}
-	14.814814814814815% {
-			-webkit-transform: translateY(-48px);
-			transform: translateY(-48px)
-	}
-	22.22222222222222% {
-			-webkit-transform: translateY(-96px);
-			transform: translateY(-96px)
-	}
-	25.925925925925927% {
-			-webkit-transform: translateY(-96px);
-			transform: translateY(-96px)
-	}
-	33.333333333333336% {
-			-webkit-transform: translateY(-144px);
-			transform: translateY(-144px)
-	}
-	37.03703703703704% {
-			-webkit-transform: translateY(-144px);
-			transform: translateY(-144px)
-	}
-	44.44444444444444% {
-			-webkit-transform: translateY(-192px);
-			transform: translateY(-192px)
-	}
-	48.148148148148145% {
-			-webkit-transform: translateY(-192px);
-			transform: translateY(-192px)
-	}
-	55.55555555555556% {
-			-webkit-transform: translateY(-240px);
-			transform: translateY(-240px)
-	}
-	59.25925925925926% {
-			-webkit-transform: translateY(-240px);
-			transform: translateY(-240px)
-	}
-	66.66666666666667% {
-			-webkit-transform: translateY(-288px);
-			transform: translateY(-288px)
-	}
-	70.37037037037037% {
-			-webkit-transform: translateY(-288px);
-			transform: translateY(-288px)
-	}
-	77.77777777777777% {
-			-webkit-transform: translateY(-336px);
-			transform: translateY(-336px)
-	}
-	81.48148148148148% {
-			-webkit-transform: translateY(-336px);
-			transform: translateY(-336px)
-	}
-	88.88888888888889% {
-			-webkit-transform: translateY(-384px);
-			transform: translateY(-384px)
-	}
-	92.5925925925926% {
-			-webkit-transform: translateY(-384px);
-			transform: translateY(-384px)
-	}
-	100.0% {
-			-webkit-transform: translateY(-432px);
-			transform: translateY(-432px)
-	}
-}
-
-
-#master-container-scroller .master-container-scroller_item:nth-child(1),
-  #master-container-scroller .master-container-scroller_item:nth-child(1) a {
-			color: #e6c559;
-	font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(2),
-  #master-container-scroller .master-container-scroller_item:nth-child(2) a {
-      color: #E65F48;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(3),
-  #master-container-scroller .master-container-scroller_item:nth-child(3) a {
-      color: #b3c2b0;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(4),
-  #master-container-scroller .master-container-scroller_item:nth-child(4) a {
-      color: #84719f;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(5),
-  #master-container-scroller .master-container-scroller_item:nth-child(5) a {
-      color: #d47787;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(6),
-  #master-container-scroller .master-container-scroller_item:nth-child(6) a {
-      color: #F09551;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(7),
-  #master-container-scroller .master-container-scroller_item:nth-child(7) a {
-      color: #c8bfd1;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(8),
-  #master-container-scroller .master-container-scroller_item:nth-child(8) a {
-      color: #e86042;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(9),
-  #master-container-scroller .master-container-scroller_item:nth-child(9) a {
-      color: #74bcae;
-	  font-family: 'Times New Roman', cursive;
-  }
-
-  #master-container-scroller .master-container-scroller_item:nth-child(10),
-  #master-container-scroller .master-container-scroller_item:nth-child(10) a {
-      color: #808080;
-	  font-family: 'Times New Roman', cursive;
-  }
 
 #user-head {
 	border-radius: 50%;

@@ -24,37 +24,8 @@
 <body>
     <header>
         <div style="display: flex">
-            <h3 id = "shareTitle">SHARE YOUR FEELINGS WITH</h3>
-            <div class='masthead-image' id='master-container' style="margin-top: 13px; margin-left:13px;">
-                <div class='content center'>
-                    <h1 id='master'>
-                      <div id='master-container-scroller'>
-                        <div class='master-container-scroller_item'>Her 👩‍💻
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🏫
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍🍳
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🔬
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍✈️
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🏭
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍🚀
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍🎨
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🎓
-                        </div>
-                        <div class='master-container-scroller_item' >Him 👨‍🌾
-                        </div>
-                      </div>
-                    </h1>
-                </div>
-            </div>
+            <h3 id = "shareTitle">STICKY POST</h3>
         </div>
-
         <nav>
             <button class="link-btn" id="time" > Newest Posts </button>
             <button class="link-btn" id="score" > Hottest Posts </button>
@@ -75,7 +46,7 @@
                         <li class="s2"><a href="#about"><span id="about-btn" class="menu-content">About</span></a>
                         </li>
 
-                        <li class="s2"><a href='https://github.com/YufeiGao6/a4-webapp'><span class="menu-content">Github</span></a>
+                        <li class="s2"><a href='https://github.com/YufeiGao6/fp'><span class="menu-content">Github</span></a>
                         </li>
 
                         <li class="s2"><a href='mailto:ygao6@wpi.edu; rwang5@wpi.edu; ywu8@wpi.edu; dxu2@wpi.edu?subject=Give us feedback' style = "font-size: 12px"><span class="menu-content">Feedback</span></a>
@@ -128,6 +99,12 @@
                 <div class="text-control">
                     <textarea class="tag-content" id="tag-content"> </textarea>
                 </div>
+                <div class="checkboxFive">
+                    <input type="checkbox" value="1" id="checkboxFiveInput" name="" /><label for="checkboxFiveInput"></label>
+                </div>
+                <div class = "anonymous">
+                    Post Anonymously
+                </div>
                 <div class="create-control">
                     <button class="post-btn" onclick="postTag()"> Post </button>
                 </div>
@@ -136,7 +113,7 @@
         </div>
 
         <div id ="call-text" class="call-text">
-            <h1>Start sharing <span>your feelings</span>...</h1>
+            <h1>Start sharing <span>your thoughts</span>...</h1>
         </div>
     </div>
 
