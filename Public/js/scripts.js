@@ -111,6 +111,8 @@ if(window.location.href.includes("?")) {
 }
 
 window.onload = function () {
+    document.head.style.cursor = "progress";
+    document.body.style.cursor = "progress";
     (function() {
         let model = document.getElementById('log-page');
         let btn = document.getElementById('log-btn');
@@ -681,6 +683,7 @@ function loadTags(hotness) {
             if(flag ===1) {
                 let load = document.getElementById("loader");
                 load.className = "loader2";
+                document.body.style.cursor = "auto";
             }
         })();
     }
