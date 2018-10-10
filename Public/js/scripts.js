@@ -19,8 +19,6 @@ function checkAni() {
 }
 
 
-
-
 function User(id, username, email, tagsId, photourl) {
     let o = {};
     o.id = id;
@@ -169,6 +167,7 @@ function login() {
             let curUser = User(sentBackUser._id, sentBackUser.username, sentBackUser.email, sentBackUser.tagsId, sentBackUser.photo_url);;
             window.sessionStorage.setItem('user', JSON.stringify(curUser));
         }
+
         showLogInStatus();
     }
 }
@@ -177,7 +176,13 @@ function logOut(){
     document.getElementById("loginUsername").innerText = "";
     document.getElementById("loginPassword").innerText = "";
     sessionStorage.removeItem('user');
-    showLogOutStatus();
+    swal({
+        text: "Successfully log out",
+        button: false,
+        closeOnClickOutside: false
+    });
+
+    setTimeout(function(){ showLogOutStatus(); }, 1300);
 }
 
 function showLogOutStatus() {
@@ -538,7 +543,7 @@ function loadTags(hotness) {
 
         function spiral(i, callback) {
             angle = config.spiralResolution * i;
-            x = (1 + angle) * Math.cos(angle) * 2.3 + 6;
+            x = (1 + angle) * Math.cos(angle) * 2.2 - 45;
             y = (1 + angle) * Math.sin(angle) - 100;
             return callback ? callback() : null;
         }
