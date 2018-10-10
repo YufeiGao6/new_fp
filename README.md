@@ -17,7 +17,7 @@ Want to know the most popular topics among friends? The more "like" a post gets,
 
 ![](./Images/Drag.gif)
 ![](../Images/createPage.png)
-![](/Images/createPage.png)
+![](/Images/userPage.png)
 
 
 
