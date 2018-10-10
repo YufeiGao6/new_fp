@@ -1,4 +1,4 @@
-
+/**********full text style********/
 .fulltext{
 	background-color: transparent;
 	position: absolute;
@@ -179,8 +179,14 @@ body {
 }
 
 .swal-button {
-  border-radius: 1px;
-  background-color: rgba(138, 174, 218, 0.7);
+	border-radius: 1px;
+	background-color: white;
+	color:#142c59;
+}
+
+.swal-button:hover{
+	background-color: #142c59;
+	color:white;
 }
 
 
@@ -780,11 +786,7 @@ body, html{
 	background-color: white;
     margin: 0;
     padding: 0;
-
-
-
 }
-
 
 /**********header style************/
 header {
@@ -795,63 +797,10 @@ header {
 	vertical-align: center;
 	z-index: 5;
 	height: 50px;
-	animation: 0.1s fadeInDown 0s forwards;
     width: 100%;
 	opacity: 0.8;
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
 
 /**********nav button style*******/
 .nav-btn{
@@ -905,28 +854,6 @@ header {
 	margin-right: 10px;
 	border-top: 5px;
 	/* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) */
-}
-@-webkit-keyframes fadeInBtn {
-  from {
-		opacity: 0;
-		-webkit-transform: translate3d(0, -300%, 0);
-    transform: translate3d(0, -300%, 0);
-  }
-
-  to {
-		opacity: 1;
-		-webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes fadeInBtn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 .link-btn:hover{
@@ -1047,8 +974,7 @@ height:100%;
 }
 
 #shareTitle{
-	animation: 0.35s fadeInDown 0.2s forwards;
-	opacity: 0;
+	opacity: 1;
 	font: 20px 'Times New Roman', cursive;
 	color: black;
 	padding-left: 150px;
