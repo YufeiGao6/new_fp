@@ -257,6 +257,7 @@ function loadTags(hotness) {
                 content: sentBackObj[i].content,
                 date: sentBackObj[i].date,
                 likeUserIds: sentBackObj[i].likeUserIds,
+                anonymous: sentBackObj[i].anonymous
             };
             tags[i] = currentTag;
         }
@@ -329,6 +330,7 @@ function loadTags(hotness) {
             let id = tag._id;
             let authorId = tag.authorId;
             let word = tag.content;
+            let anonymous = tag.anonymous;
             let score = tag.score;
             let date = new Date(tag.date);
             let freq = 0;
@@ -395,14 +397,19 @@ function loadTags(hotness) {
                 let sentBackObj = JSON.parse(this.responseText);
 
                 if(sentBackObj){
-                    authorName = sentBackObj.username;
-                    nameDiv.innerText = authorName;
-                    photoUrl = sentBackObj.photo_url;
-                    photo.src = photoUrl;
-                    photo.className = "photo";
-                    photo.style.width = freq+5 + "px";
-                    photoSpan.appendChild(photo);
-                    photoSpan.className = "photoSpan";
+                    if(anonymous){
+                        nameDiv.innerText = "Anonymous";
+                    }
+                    else{
+                        authorName = sentBackObj.username;
+                        nameDiv.innerText = authorName;
+                        photoUrl = sentBackObj.photo_url;
+                        photo.src = photoUrl;
+                        photo.className = "photo";
+                        photo.style.width = freq+5 + "px";
+                        photoSpan.appendChild(photo);
+                        photoSpan.className = "photoSpan";
+                    }
                 }
                 else{
                     nameDiv.innerText = "Anonymous";
@@ -566,8 +573,8 @@ function loadTags(hotness) {
         /* =======================  LETS GO! =======================  */
         (function placeWords() {
             let length = tags.length;
-            if (tags.length>20){
-                length = 20;
+            if (tags.length>16){
+                length = 16;
             }
             for (var i = 0; i < length; i += 1) {
 
@@ -607,6 +614,7 @@ function postTag() {
     let content = document.getElementById("tag-content").value;
     let date = new Date();
     let likeUserIds = [];
+    let anonymous = document.getElementById("checkbox").checked;
     likeUserIds.push(authorId);
 
     if (content.trim() !== "") {
@@ -616,6 +624,7 @@ function postTag() {
         data['content'] = content.toString();
         data['date'] = date;
         data['likeUserIds'] = likeUserIds;
+        data['anonymous'] = anonymous;
         let maxNum = 120;
 
         if (data['content'].length >= maxNum) {

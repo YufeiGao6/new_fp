@@ -36,7 +36,8 @@ let tagSchema = new mongoose.Schema({
     score: Number,
     content: String,
     date: Date,
-    likeUserIds: Array
+    likeUserIds: Array,
+    anonymous: Boolean
 });
 
 let User = mongoose.model("User", userSchema);
@@ -55,7 +56,8 @@ let tag1 = new Tag({
     score: 10,
     content: 'gdhajhjdagd',
     date: '2016-05-18T16:00:00Z',
-    likeUserIds: ['5bae568b134c661f3c90107f']
+    likeUserIds: ['5bae568b134c661f3c90107f'],
+    anonymous: false
 });
 
 let server = http.createServer (function (req, res) {
@@ -138,7 +140,7 @@ let server = http.createServer (function (req, res) {
                                   password: md5(createPassword),
                                   email: createEmail,
                                   tagIds: [],
-                                  photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png"
+                                  photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png",
                               });
                               curUser.save(function (err, res) {
                                   if (err) {
@@ -172,13 +174,15 @@ let server = http.createServer (function (req, res) {
               let content = obj.content;
               let date = obj.date;
               let likeUserIds = obj.likeUserIds;
+              let anonymous = obj.anonymous;
 
               let data = new Tag({
                   authorId: authorId,
                   score: score,
                   content: content,
                   date: date,
-                  likeUserIds: likeUserIds
+                  likeUserIds: likeUserIds,
+                  anonymous: anonymous
               });
               data.save(function(err, a) {
                   if(err) {
@@ -252,7 +256,6 @@ let server = http.createServer (function (req, res) {
                   tagIds: tagIds
               }, {multi: true}, function (err, docs) {
                   if (err) console.log(err);
-                  console.log('updated' + docs);
               });
           });
           break;
