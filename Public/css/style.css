@@ -125,27 +125,21 @@ body {
 	margin-top: 30px ;
 }
 
+/***********alert style ***********/
+
 .swal-modal{
-	z-index: 999;
-	position: relative;
+	border-radius: 1px;
 }
 
 .swal-overlay{
-	/* float: left;
-	width: 100%;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover; */
-	/* -webkit-filter: blur(15px);
-	-moz-filter: blur(15px);
-	-o-filter: blur(15px);
-	-ms-filter: blur(15px); */
-	/* filter: blur(55px); */
-	z-index: 1000;
-	filter: blur(15px);
-	position: relative;
-	/* filter: grayscale(100%); */
+	background-color: rgba(253, 251, 251,0.7)
 }
+
+.swal-button {
+  border-radius: 1px;
+  background-color: rgba(138, 174, 218, 0.7);
+}
+
 
 /***********loader style ***********/
 .lds-roller {
@@ -843,10 +837,10 @@ header {
 
 
 .footer #button{
-	width:35px;
-	height:35px;
-	border: #898989 12px solid;
-	border-radius:35px;
+	width:20px;
+	height:20px;
+	border: #898989 8px solid;
+	border-radius:20px;
 	margin:0 auto;
 	position:relative;
 	-webkit-transition: all 0.5s ease;
@@ -856,9 +850,9 @@ header {
     transition: all 0.5s ease;
 }
 .footer #button:hover{
-	width:35px;
-	height:35px;
-	border: black 12px solid;
+	width:20px;
+	height:20px;
+	border: black 8px solid;
 	-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -871,7 +865,7 @@ header {
 	left:0;
 	position:fixed;
     width: 100%;
-    height: 2em;
+    height: 1.5em;
     overflow:hidden;
     margin:0 auto;
 	-webkit-transition: all 0.5s ease;
@@ -887,7 +881,7 @@ header {
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     transition: all 0.5s ease;
-	height: 10em;
+	height: 6em;
 }
 .footer #container{
 	margin-top:5px;
@@ -900,7 +894,7 @@ height:100%;
 }
 .footer #cont{
 	position:relative;
-	top:-45px;
+	top:-58px;
 	right:190px;
 	width:150px;
 	height:auto;
