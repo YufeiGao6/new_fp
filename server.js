@@ -117,6 +117,9 @@ let server = http.createServer (function (req, res) {
     case '/icon.ico':
         sendFile(res, 'icon.ico');
         break;
+      case '/images/logo.png':
+          sendFile(res, 'Public/images/logo.png');
+          break;
     case '/images/left.jpeg':
           sendFile(res, 'Public/images/left.jpeg');
           break;
