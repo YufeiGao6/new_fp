@@ -54,7 +54,7 @@
 .line2{
     align-items: center;
     left:-1000px;
-    margin-right: 70px;
+    margin-right: 45px;
     width:60%;
     background-color:#D5D5D5;
     color:#D5D5D5;
@@ -64,7 +64,7 @@
 
 @keyframes flowin2 {
     from {margin-right: -1000px;}
-    to {margin-right: 70px;}
+    to {margin-right: 45px;}
 }
 
 
