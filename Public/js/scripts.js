@@ -8,6 +8,24 @@ function User(id, username, email, tagsId, photourl) {
     return o;
 }
 
+function checkAni() {
+    let cta = document.getElementById("cta");
+    let createPage = document.getElementById("login-text");
+    let createContent = document.getElementById("create-content");
+    var temp = createPage.className;
+
+    if(temp === "login-text") {
+        createPage.className = "login-text2";
+        createContent.className = "show-hide";
+        cta.className = "fas fa-arrow-up";
+    }else{
+        createPage.className = "login-text";
+        cta.className = "fas fa-arrow-down";
+        createContent.className = "text";
+    }
+
+}
+
 /**
  * check whether there exists a curUser, if yes, return true; else false;
  * @returns {boolean}
@@ -38,7 +56,7 @@ window.onload = function () {
         let btn = document.getElementById('log-btn');
         let span = document.querySelector(".close");
 
-        let model2 = document.getElementById('add-page');
+        let model2 = document.getElementById('wrapper');
         let btn2 = document.getElementById('add-btn');
         let span2 = document.querySelector(".close2");
 
@@ -170,6 +188,14 @@ function logOut(){
     document.getElementById("loginUsername").innerText = "";
     document.getElementById("loginPassword").innerText = "";
     sessionStorage.removeItem('user');
+    swal({
+        text: "Successfully log out",
+        button: false,
+        closeOnClickOutside: false
+    });
+
+    setTimeout(function(){ showLogOutStatus(); }, 1300);
+    // to do:
     showLogOutStatus();
 }
 
@@ -250,6 +276,7 @@ function loadTags(hotness) {
                 content: sentBackObj[i].content,
                 date: sentBackObj[i].date,
                 likeUserIds: sentBackObj[i].likeUserIds,
+                anonymous: sentBackObj[i].anonymous
             };
             tags[i] = currentTag;
         }
@@ -270,9 +297,11 @@ function loadTags(hotness) {
         let pink = "#e0cdcf";
         let purple = "#c9c0d3";
         let blue = "#c1cbd7";
-        let grey = "#ececea";
+        let gray = "#ececea";
+        let gray2 = "#e5e6e8";
+        let gray3 = "#f2f2f2";
 
-        let colors = [yellow, green, mint, blue, grey, milk, pink, purple];
+        let colors = ["white","lightgray",gray, milk, gray2, gray3];
         function randomColor() {
             let index = Math.floor((Math.random()*colors.length));
             return colors[index];
@@ -318,7 +347,9 @@ function loadTags(hotness) {
                 userId = curUser.id;
             }
             let id = tag._id;
+            let authorId = tag.authorId;
             let word = tag.content;
+            let anonymous = tag.anonymous;
             let score = tag.score;
             let date = new Date(tag.date);
             let freq = 0;
@@ -327,7 +358,7 @@ function loadTags(hotness) {
                 freq = date.valueOf()/100000000000;
             }
             else{
-                freq = 1.2*score+12;
+                freq = 0.8*score+14;
             }
 
             let month = date.getMonth()+1;
@@ -337,14 +368,19 @@ function loadTags(hotness) {
             date = month+"/"+day+"-"+time;
 
             let likeUserIds = tag.likeUserIds;
-            let dateContainer = document.createElement("span");
-            let likeSubCon = document.createElement("span");
             let container = document.createElement("div");
             let tagContainer = document.createElement("div");
-            let likeContainer = document.createElement("div");
             let contentContainer = document.createElement("div");
             let likeButton = document.createElement("button");
             let post = document.createElement("p");
+
+            let bigDiv = document.createElement("div");
+            let photoSpan = document.createElement("span");
+            let photo = document.createElement("img");
+            let midSpan = document.createElement("span");
+            let nameDiv = document.createElement("div");
+            let dateDiv = document.createElement("div");
+            let likeSpan = document.createElement("span");
 
             container.className = "container";
             container.id = id;
@@ -353,14 +389,61 @@ function loadTags(hotness) {
             tagContainer.style.backgroundColor = randomColor();
             tagContainer.onmouseover = function(){
                 tagContainer.style.transform = "scale("+ (5/freq + 1) +")";
-                container.zIndex = 2;
+                container.style.zIndex = "1";
             };
             tagContainer.onmouseout = function(){
                 tagContainer.style.transform = "scale(1)";
-                container.zIndex = -1;
+                container.style.zIndex = "0";
             };
 
-            dateContainer.innerText = date;
+            dateDiv.innerText = date;
+            dateDiv.style.fontSize = freq*0.7 +"px";
+            dateDiv.style.color = "grey";
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "/getUsernameById");
+            xhr.send(authorId);
+            let authorName = "";
+            let photoUrl = "";
+            xhr.onreadystatechange = handle_res;
+            function handle_res() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    return;
+                }
+                let sentBackObj = JSON.parse(this.responseText);
+
+                if(sentBackObj){
+                    if(anonymous){
+                        nameDiv.innerText = "Anonymous";
+                    }
+                    else{
+                        authorName = sentBackObj.username;
+                        nameDiv.innerText = authorName;
+                        photoUrl = sentBackObj.photo_url;
+                        photo.src = photoUrl;
+                        photo.className = "photo";
+                        photo.style.width = freq+5 + "px";
+                        photoSpan.appendChild(photo);
+                        photoSpan.className = "photoSpan";
+                    }
+                }
+                else{
+                    nameDiv.innerText = "Anonymous";
+                }
+                nameDiv.style.fontSize = freq*0.8 +"px";
+                nameDiv.style.fontFamily = "Helvetica";
+
+                midSpan.appendChild(nameDiv);
+                midSpan.appendChild(dateDiv);
+                midSpan.className = "photoSpan";
+
+            }
+            bigDiv.appendChild(photoSpan);
+            bigDiv.appendChild(midSpan);
+
 
             if (checkCurUser()){ // user logged in
                 if(likeUserIds.includes(userId)){
@@ -377,10 +460,9 @@ function loadTags(hotness) {
                     if (like.className === "unlikeButton") {
                         likeButton.className = "likeButton";
                         score = score+1;
-                        likeSubCon.innerText = score;
-                        likeSubCon.appendChild(likeButton);
-                        likeContainer.appendChild(likeSubCon);
-                        likeContainer.appendChild(dateContainer);
+                        likeSpan.innerText = score;
+                        likeSpan.style.fontSize = freq*0.8 + "px";
+                        likeSpan.appendChild(likeButton);
                         // db把当前user加进当前tag的likeUserIds
                         let likeData = {};
                         likeData['userId'] = userId;
@@ -403,10 +485,8 @@ function loadTags(hotness) {
                     }else {
                         likeButton.className = "unlikeButton";
                         score = score-1;
-                        likeSubCon.innerText = score;
-                        likeSubCon.appendChild(likeButton);
-                        likeContainer.appendChild(likeSubCon);
-                        likeContainer.appendChild(dateContainer);
+                        likeSpan.innerText = score;
+                        likeSpan.appendChild(likeButton);
                         // db把当前user移出当前tag的likeUserIds
                         let unlikeData = {};
                         unlikeData['userId'] = userId;
@@ -439,15 +519,15 @@ function loadTags(hotness) {
                 }
             }
 
-            likeSubCon.innerText = score;
-            likeSubCon.appendChild(likeButton);
-            likeContainer.appendChild(likeSubCon);
-            likeContainer.appendChild(dateContainer);
-            likeContainer.className = "like";
-            dateContainer.style.fontSize = freq*0.7 + "px";
-            dateContainer.style.paddingTop = 3 + "px";
-            likeContainer.style.fontSize = freq + "px";
-            likeContainer.style.padding = freq/5 + "px";
+            likeSpan.innerText = score;
+            likeSpan.appendChild(likeButton);
+
+            likeSpan.style.fontSize = freq + "px";
+            likeSpan.className = "likeSpan";
+
+            let width = parseInt(midSpan.style.width) + parseInt(likeSpan.style.width) + 50;
+
+            container.style.maxWidth = width + "px";
 
             post.innerText = word;
 
@@ -456,7 +536,11 @@ function loadTags(hotness) {
             contentContainer.style.fontSize = freq + "px";
             contentContainer.style.padding = freq/5 + "px";
 
-            tagContainer.appendChild(likeContainer);
+            bigDiv.style.height = 2*freq + "px";
+            likeSpan.style.lineHeight = 2 * freq + "px";
+            bigDiv.appendChild(likeSpan);
+            bigDiv.style.paddingTop = "5px";
+            tagContainer.appendChild(bigDiv);
             tagContainer.appendChild(contentContainer);
 
             container.appendChild(tagContainer);
@@ -473,7 +557,7 @@ function loadTags(hotness) {
 
         function spiral(i, callback) {
             angle = config.spiralResolution * i;
-            x = (1 + angle) * Math.cos(angle) * 2.3 + 6;
+            x = (1 + angle) * Math.cos(angle) * 2.2 - 45;
             y = (1 + angle) * Math.sin(angle) - 100;
             return callback ? callback() : null;
         }
@@ -507,7 +591,11 @@ function loadTags(hotness) {
 
         /* =======================  LETS GO! =======================  */
         (function placeWords() {
-            for (var i = 0; i < tags.length; i += 1) {
+            let length = tags.length;
+            if (tags.length>16){
+                length = 16;
+            }
+            for (var i = 0; i < length; i += 1) {
 
                 var word = createWordObject(tags[i]);
 
@@ -545,8 +633,8 @@ function postTag() {
     let content = document.getElementById("tag-content").value;
     let date = new Date();
     let likeUserIds = [];
+    let anonymous = document.getElementById("checkbox").checked;
     likeUserIds.push(authorId);
-
 
     if (content.trim() !== "") {
         let data = {};
@@ -555,29 +643,55 @@ function postTag() {
         data['content'] = content.toString();
         data['date'] = date;
         data['likeUserIds'] = likeUserIds;
+        data['anonymous'] = anonymous;
+        let maxNum = 120;
 
-        let sendData = JSON.stringify(data);
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = handle_res;
-        xhr.open("post", "/postTag");
-        xhr.send(sendData);
+        if (data['content'].length >= maxNum) {
+            let text = data['content'].length - maxNum;
+            swal({
+                title: "Your Input Message Is Too Long",
+                text: "Please Delete At Least " + text + " Letter(s)",
+                icon: "warning",
+                button: "Got It",
+                closeOnClickOutside: false
+            });
+        } else {
+            let sendData = JSON.stringify(data);
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = handle_res;
+            xhr.open("post", "/postTag");
+            xhr.send(sendData);
 
-        function handle_res() {
-            if (this.readyState !== 4) {
-                return;
+            function handle_res() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status !== 200) {
+                    return;
+                }
+                let sentBackObj = JSON.parse(this.responseText);
+                let tagId = sentBackObj._id;
+                getTagIdsByAuthorId(authorId, tagId);
+
+                swal({
+                    text: "Posts +1",
+                    button: false,
+                    closeOnClickOutside: false
+                });
+
+                setTimeout(function(){ location.reload(); }, 1300);
+                }
             }
-            if (this.status !== 200) {
-                return;
-            }
-            let sentBackObj = JSON.parse(this.responseText);
-            let tagId = sentBackObj._id;
-            getTagIdsByAuthorId(authorId, tagId);
 
-            location.reload();
-        }
     }
     else {
-        alert("Please enter something!");
+        swal({
+            title: "Your Input Message Is Empty",
+            text: "Please Enter Something",
+            icon: "warning",
+            button: "Got It",
+            closeOnClickOutside: false
+        });
     }
 }
 
@@ -588,7 +702,7 @@ function postTag() {
  */
 function getTagIdsByAuthorId(authorId, tagId) {
     let xhr = new XMLHttpRequest();
-    xhr.open("post", "/getTagIdsByAuthorId");
+    xhr.open("post", "/getUserById");
     xhr.send(authorId);
     let tagIds = [];
     xhr.onreadystatechange = handle_res;

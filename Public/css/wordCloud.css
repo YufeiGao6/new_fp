@@ -11,22 +11,21 @@ body, html, p {
 
 .container{
   word-wrap:break-word;
-  word-break:break-all;
   min-width: 150px;
-  max-width: 250px;
   position: absolute;
-  z-index: 0;
 }
 
 .tag{
   max-width: 250px;
-  border: 0px solid black;
   margin: 10px;
   background-color: white;
   z-index: 0;
   animation: 0.55s bling 0.1s forwards;
   opacity: 0;
-  border-radius: 10px;
+  border-radius: 5px;
+  -moz-box-shadow:0px 4px 15px #C2C2C2;
+  -webkit-box-shadow:0px 4px 15px #C2C2C2;
+  box-shadow:0px 4px 15px #C2C2C2;
 }
 
 .tag:hover {
@@ -38,10 +37,11 @@ body, html, p {
   border: 0 solid black;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 0;
 }
 
 .content{
-  max-width: 250px;
+  word-wrap: break-word;
   border: 0 solid black;
   line-height: 1.1em;
   margin: 0 5px 0 5px;
@@ -85,5 +85,23 @@ body, html, p {
 }
 
 #outer{
-  margin-top: 50px;
+  margin-top: 80px;
+}
+
+.photo {
+  border-radius: 50%;
+  width: 20px;
+}
+
+.photoSpan{
+  padding-left: 5px;
+  float: left;
+  display: inline-block;
+}
+
+.likeSpan{
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+  display: inline-block;
 }

@@ -37,7 +37,8 @@ let tagSchema = new mongoose.Schema({
     score: Number,
     content: String,
     date: Date,
-    likeUserIds: Array
+    likeUserIds: Array,
+    anonymous: Boolean
 });
 let userAuthSchedma = new mongoose.Schema({
     userId: String,
@@ -59,7 +60,8 @@ let tag1 = new Tag({
     score: 10,
     content: 'gdhajhjdagd',
     date: '2016-05-18T16:00:00Z',
-    likeUserIds: ['5bae568b134c661f3c90107f']
+    likeUserIds: ['5bae568b134c661f3c90107f'],
+    anonymous: false
 });
 let auth = new Auth({
     userId: '5bb660482d27d60015e582aa',
@@ -71,7 +73,7 @@ let server = http.createServer (function (req, res) {
     let uri = url.parse(req.url);
   switch( uri.pathname ) {
     case '/':
-        sendFile(res, 'Public/html/index.html');
+        sendFile(res, 'Public/html/start.html');
         break;
     case '/index.html':
         sendFile(res, 'Public/html/index.html');
@@ -81,6 +83,9 @@ let server = http.createServer (function (req, res) {
         break;
     case '/user.html':
         sendFile(res, 'Public/html/user.html');
+        break;
+  case '/start.html':
+        sendFile(res, 'Public/html/start.html');
         break;
     case '/css/style.css':
         sendFile(res, 'Public/css/style.css', 'text/css');
@@ -94,6 +99,9 @@ let server = http.createServer (function (req, res) {
     case '/css/user.css':
         sendFile(res, 'Public/css/user.css', 'text/css');
         break;
+    case '/css/start.css':
+        sendFile(res, 'Public/css/start.css', 'text/css');
+        break;
     case '/js/scripts.js':
         sendFile(res, 'Public/js/scripts.js', 'text/javascript');
         break;
@@ -103,6 +111,9 @@ let server = http.createServer (function (req, res) {
     case '/js/user.js':
         sendFile(res, 'Public/js/user.js', 'text/javascript');
         break;
+    case '/js/start.js':
+          sendFile(res, 'Public/js/start.js', 'text/javascript');
+          break;
     case '/icon.ico':
         sendFile(res, 'icon.ico');
         break;
@@ -138,7 +149,7 @@ let server = http.createServer (function (req, res) {
                                   password: md5(createPassword),
                                   email: createEmail,
                                   tagIds: [],
-                                  photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png"
+                                  photo_url: "http://images.nowcoder.com/head/"+ (Math.random().toFixed(2)*400 + 100) + "t.png",
                               });
                               curUser.save(function (err, response) {
                                   if (err) {
@@ -205,13 +216,15 @@ let server = http.createServer (function (req, res) {
               let content = obj.content;
               let date = obj.date;
               let likeUserIds = obj.likeUserIds;
+              let anonymous = obj.anonymous;
 
               let data = new Tag({
                   authorId: authorId,
                   score: score,
                   content: content,
                   date: date,
-                  likeUserIds: likeUserIds
+                  likeUserIds: likeUserIds,
+                  anonymous: anonymous
               });
               data.save(function(err, a) {
                   if(err) {
@@ -294,11 +307,10 @@ let server = http.createServer (function (req, res) {
                   tagIds: tagIds
               }, {multi: true}, function (err, docs) {
                   if (err) console.log(err);
-                  console.log('updated' + docs);
               });
           });
           break;
-      case '/getTagIdsByAuthorId':
+      case '/getUserById':
           let authorData = '';
           req.on('data', function (d) {
               authorData += d;
@@ -306,6 +318,23 @@ let server = http.createServer (function (req, res) {
           req.on('end', function () {
               let sentBackTag = [];
               User.findOne({_id: authorData}, function(err, docs) {
+                  if(err) {
+                      console.log("err");
+                  }else {
+                      sentBackTag = docs;
+                      res.end(JSON.stringify(sentBackTag));
+                  }
+              });
+          });
+          break;
+      case '/getUsernameById':
+          let author = '';
+          req.on('data', function (d) {
+              author += d;
+          });
+          req.on('end', function () {
+              let sentBackTag = [];
+              User.findOne({_id: author}, function(err, docs) {
                   if(err) {
                       console.log("err");
                   }else {

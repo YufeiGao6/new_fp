@@ -24,40 +24,11 @@
 <body>
     <header>
         <div style="display: flex">
-            <h3 id = "shareTitle">SHARE YOUR FEELINGS WITH</h3>
-            <div class='masthead-image' id='master-container' style="margin-top: 13px; margin-left:13px;">
-                <div class='content center'>
-                    <h1 id='master'>
-                      <div id='master-container-scroller'>
-                        <div class='master-container-scroller_item'>Her 👩‍💻
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🏫
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍🍳
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🔬
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍✈️
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🏭
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍🚀
-                        </div>
-                        <div class='master-container-scroller_item'>Him 👨‍🎨
-                        </div>
-                        <div class='master-container-scroller_item'>Her 👩‍🎓
-                        </div>
-                        <div class='master-container-scroller_item' >Him 👨‍🌾
-                        </div>
-                      </div>
-                    </h1>
-                </div>
-            </div>
+            <h3 id = "shareTitle">STICKY POST</h3>
         </div>
-
         <nav>
-            <button class="link-btn" id="time" > Sort by Time </button>
-            <button class="link-btn" id="score" > Sort by Hotness </button>
+            <button class="link-btn" id="time" > Newest Posts </button>
+            <button class="link-btn" id="score" > Hottest Posts </button>
             <button class="link-btn" id="add-btn" > Create a Post </button>
             <button class="link-btn" id="log-btn" > Login/Signup </button>
             <span id="Welcome"></span>
@@ -75,7 +46,7 @@
                         <li class="s2"><a href="#about"><span id="about-btn" class="menu-content">About</span></a>
                         </li>
 
-                        <li class="s2"><a href='https://github.com/YufeiGao6/a4-webapp'><span class="menu-content">Github</span></a>
+                        <li class="s2"><a href='https://github.com/YufeiGao6/fp'><span class="menu-content">Github</span></a>
                         </li>
 
                         <li class="s2"><a href='mailto:ygao6@wpi.edu; rwang5@wpi.edu; ywu8@wpi.edu; dxu2@wpi.edu?subject=Give us feedback' style = "font-size: 12px"><span class="menu-content">Feedback</span></a>
@@ -117,19 +88,32 @@
             <p class="signup-mes">Don't have an account?</p>
             <button style="margin-top: 10px" class="btn" type="button" onclick="{location.href='signup.html'}">Sign up</button>
         </div>
-
     </div>
 
-    <div id="add-page" class="model">
-        <div class="model-content">
+
+    <div class="wrapper" id="wrapper">
+        <div  id="login-text" class="login-text">
             <span class="close2">&times;</span>
+            <button class="cta" onclick="checkAni()"><i id="cta" class="fas fa-arrow-down"></i></button>
+            <div id="create-content" class="text">
+                <div class="text-control">
+                    <textarea class="tag-content" id="tag-content"> </textarea>
+                </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="checkbox">
+                            Post Anonymously
+                        </label>
+                    </div>
+                <div class="create-control">
+                    <button class="post-btn" onclick="postTag()"> Post </button>
+                </div>
+
+            </div>
         </div>
-        <p class="title2">Write down your feelings...</p>
-        <div class="text-control">
-            <textarea class="tag-content" id="tag-content"> </textarea>
-        </div>
-        <div class="create-control">
-            <button class="btn" type="button" onclick="postTag()"> Post </button>
+
+        <div id ="call-text" class="call-text">
+            <h1>Start sharing <span>your thoughts</span>...</h1>
         </div>
     </div>
 
@@ -155,7 +139,7 @@
       <div id="container">
       <div id="cont">
       <div class="footer_center">
-          <h3>© 2018 Copyright: BaBaMen <a href="https://github.com/YufeiGao6" target="_blank"> Yufei Gao,</a>
+          <h3>© 2018 Copyright: <span style="font-weight: bold">BaBaMen</span> <a href="https://github.com/YufeiGao6" target="_blank"> Yufei Gao,</a>
                                           <a href="https://github.com/ruyuewang" target="_blank"> Ruyue Wang, </a>
                                           <a href="https://github.com/dxu2" target="_blank"> Da Xu,</a>
                                           <a href="https://github.com/YuxinWu1998" target="_blank"> Yuxin Wu</a>
