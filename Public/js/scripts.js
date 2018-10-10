@@ -200,7 +200,7 @@ window.onload = function () {
             document.getElementById('user-btn').style.display = "none";
         }
     }());
-    loadTags("score");
+    loadTags("time");
         // showUserName();
         // checkIfLogin();
     setTimeout(function(){ generateFulltext()}, 3000);
@@ -462,7 +462,6 @@ function loadTags(hotness) {
                 tagContainer.style.transform = "scale(1)";
                 container.style.zIndex = "0";
             };
-
             dateDiv.innerText = date;
             dateDiv.style.fontSize = freq*0.7 +"px";
             dateDiv.style.color = "grey";
