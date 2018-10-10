@@ -183,11 +183,11 @@ let server = http.createServer (function (req, res) {
                                              });
                                              let emailHtml = "http://localhost:8080/index.html" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
                                              let mailOptions = {
-                                                 from: 'teambabamen@126.com',
-                                                 to: 'xuda980520@gmail.com',
-                                                 subject: 'Thanks for register!',
-                                                 html: "<p>Our social media application called Sticky Post, which allows users to leave messages and share feelings with friends, families or colleagues.</p>" + "<a href='"+emailHtml+"'>Click Me To Activate Your Account</a>"
-                                             };
+                                               from: 'teambabamen@126.com',
+                                               to: 'jackiewu19980311@gmail.com',
+                                               subject: 'Thanks for register!',
+                                               html: fs.createReadStream(path.resolve(__dirname, 'Public/html/email.html'))
+                                           };
                                              transporter.sendMail(mailOptions, function(error, info){
                                                  if (error) {
                                                      console.log(error);
