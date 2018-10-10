@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" id="main">
 <head>
     <title>Sticky Post</title>
     <meta charset="utf-8">
@@ -12,11 +12,19 @@
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
-
 </head>
 <body>
-<div class="start">
-    <button class="start-btn" onclick="{location.href='index.html'}">GET STARTED</button>
+<div class="start" >
+    <div class="text">
+        <hr class="line">
+        <p class="start-content" >
+            Welcome to <span style="font-weight: bold">STICKY POST</span>! <br>
+        Share your feelings with your friends, families or colleagues here!
+        </p>
+        <hr class="line2">
+    </div>
+
+    <button class="start-btn" onclick="redirect()">GET STARTED</button>
 </div>
 <canvas id="canvas">
 </canvas>
@@ -116,7 +124,6 @@
                 else if (cir.x < 0) cir.x = WIDTH;
                 if (cir.y > HEIGHT) cir.y = 0;
                 else if (cir.y < 0) cir.y = HEIGHT;
-
             }
             draw();
         }, 16);
