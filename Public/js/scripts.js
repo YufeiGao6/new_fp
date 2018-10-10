@@ -1,4 +1,4 @@
-
+/*
 function generateFulltext() {
     let divs = document.getElementsByClassName("tag");
     let container = document.getElementsByClassName("container");
@@ -84,7 +84,7 @@ function checkAni() {
     }
 
 }
-
+*/
 /**
  * check whether there exists a curUser, if yes, return true; else false;
  * @returns {boolean}
@@ -132,14 +132,14 @@ window.onload = function () {
         sortByTime.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("time");
-            setTimeout(function(){ generateFulltext()}, 3000);
+            //setTimeout(function(){ generateFulltext()}, 3000);
             setTimeout(function(){ drag()}, 3000);
         };
 
         sortByScore.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("score");
-            setTimeout(function(){ generateFulltext()}, 3000);
+            //setTimeout(function(){ generateFulltext()}, 3000);
             setTimeout(function(){ drag()}, 3000);
         };
 
@@ -205,7 +205,7 @@ window.onload = function () {
     loadTags("time");
         // showUserName();
         // checkIfLogin();
-    setTimeout(function(){ generateFulltext()}, 3000);
+    //setTimeout(function(){ generateFulltext()}, 3000);
     setTimeout(function(){ drag()}, 3000);
 };
 
