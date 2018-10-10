@@ -359,18 +359,14 @@ function loadTags(hotness) {
             yWordPadding: 3,
         };
 
-        let yellow = "#f8ebd8";
-        let green = "#b5c4b1";
-        let mint = "#e0e5df";
-        let milk = "#dee6ed";
-        let pink = "#e0cdcf";
-        let purple = "#c9c0d3";
-        let blue = "#c1cbd7";
+        let blue = "#d0dbe8";
+        let blue2 = "#dfefff";
+        let blue3 = "#dee6ed";
         let gray = "#ececea";
         let gray2 = "#e5e6e8";
         let gray3 = "#f2f2f2";
 
-        let colors = ["white","lightgray",gray, milk, gray2, gray3];
+        let colors = ["white","lightgray",gray, gray2, gray3, blue, blue2, blue3];
         function randomColor() {
             let index = Math.floor((Math.random()*colors.length));
             return colors[index];
