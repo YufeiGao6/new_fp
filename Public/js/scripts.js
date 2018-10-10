@@ -55,6 +55,7 @@ function generateFulltext() {
         };
     }
 }
+*/
 
 
 function User(id, username, email, tagsId, photourl) {
@@ -84,7 +85,7 @@ function checkAni() {
     }
 
 }
-*/
+
 /**
  * check whether there exists a curUser, if yes, return true; else false;
  * @returns {boolean}
