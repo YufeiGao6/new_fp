@@ -13,6 +13,11 @@ body, html, p {
   word-wrap:break-word;
   min-width: 150px;
   position: absolute;
+  cursor: grab;
+}
+
+.container:active{
+  cursor:grabbing;
 }
 
 .tag{
@@ -26,11 +31,17 @@ body, html, p {
   -moz-box-shadow:0px 4px 15px #C2C2C2;
   -webkit-box-shadow:0px 4px 15px #C2C2C2;
   box-shadow:0px 4px 15px #C2C2C2;
+  cursor: grab;
 }
 
 .tag:hover {
+  cursor: grab;
   z-index: 1;
   animation: 0.85s enlarge 0s forwards;
+}
+
+.tag:active{
+  cursor:grabbing;
 }
 
 .like{

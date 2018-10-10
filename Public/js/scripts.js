@@ -111,6 +111,8 @@ if(window.location.href.includes("?")) {
 }
 
 window.onload = function () {
+    document.head.style.cursor = "progress";
+    document.body.style.cursor = "progress";
     (function() {
         let model = document.getElementById('log-page');
         let btn = document.getElementById('log-btn');
@@ -131,12 +133,14 @@ window.onload = function () {
             document.getElementById("word-cloud").innerHTML="";
             loadTags("time");
             setTimeout(function(){ generateFulltext()}, 3000);
+            setTimeout(function(){ drag()}, 3000);
         };
 
         sortByScore.onclick = function(){
             document.getElementById("word-cloud").innerHTML="";
             loadTags("score");
             setTimeout(function(){ generateFulltext()}, 3000);
+            setTimeout(function(){ drag()}, 3000);
         };
 
         btn3.onclick = function () {
@@ -198,7 +202,7 @@ window.onload = function () {
             document.getElementById('user-btn').style.display = "none";
         }
     }());
-    loadTags("score");
+    loadTags("time");
         // showUserName();
         // checkIfLogin();
     setTimeout(function(){ generateFulltext()}, 3000);
@@ -460,7 +464,6 @@ function loadTags(hotness) {
                 tagContainer.style.transform = "scale(1)";
                 container.style.zIndex = "0";
             };
-
             dateDiv.innerText = date;
             dateDiv.style.fontSize = freq*0.7 +"px";
             dateDiv.style.color = "grey";
@@ -680,6 +683,7 @@ function loadTags(hotness) {
             if(flag ===1) {
                 let load = document.getElementById("loader");
                 load.className = "loader2";
+                document.body.style.cursor = "auto";
             }
         })();
     }
