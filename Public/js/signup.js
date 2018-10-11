@@ -10,6 +10,7 @@ function User(id, username, email, tagsId, photourl) {
 
 //function to create user
 function createUser() {
+
     let username = document.form.username.value;
     let email = document.form.email.value;
     let password = document.form.ini_password.value;
@@ -34,6 +35,7 @@ function createUser() {
     password = checkPassword();
 
     if(password !== null) {
+
         let data = {};
         data['username'] = username.toString();
         data['email'] = email.toString();
@@ -60,8 +62,6 @@ function createUser() {
                     text: "An email has sent to you, please verify your account in the email",
                     closeOnClickOutside: false
                 });
-
-                // window.location.href= "index.html";
             }
         }
     }
@@ -69,18 +69,13 @@ function createUser() {
 
 function checkPassword(){
     let psw1 = document.form.ini_password.value;
-    console.log(psw1);
     let psw2 = document.form.password.value;
-    console.log(psw2);
-    let button = document.getElementById("create-btn");
 
     if(psw1 !== psw2){
-        button.disabled = true;
         document.getElementById("msg").innerHTML = "Please confirm your password";
         document.getElementById("msg").style.color = "red";
         return null;
     } else {
-        button.disabled = false;
         return psw2;
     }
 }
