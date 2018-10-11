@@ -11,20 +11,44 @@ The users' messages will appear on the screen as sticky posts. The only thing th
 
 **Sticky Post** allows users to do all the CRUD functions. What's more, we also store all the data in the database decently and implement multiples of event-based interaction on the front-end. A well-organized server of **Sticky Post** also gives the users a better using experience. 
 
-Want to know the most popular topics among friends? The more "like" a post gets, the larger font the post gets. This feature lets users know the hottest topics easily.
+*Since our final project is updated based on Assignment 4 (Prof. allows us to do that), the screenshots and gifs below shows the differences between A4 and FP, and the new features of FP.*
 
+The old home page vs the new home page
 
+![oldHome](/Images/homePage.png)
+![newHome](/Images/newHomePage.png)
 
-![](./Images/Drag.gif)
-![](../Images/createPage.png)
-![](/Images/userPage.png)
+The old tag vs the new tag
+
+![oldTag](/Images/oldTag.png)
+![newTag](/Images/newTag.png)
+
+The new features:
+
+Users can drag the post to any places they want
+
+![drag](/Images/dragNew.gif)
+
+Users can add emoji in their post
+
+Users can create post anonymously
+
+Users can view the newest or the hottest posts easily
+
+![hottest](/Images/hottest.gif)
+
+Users know how many letters should they delete, if their post is too long to be sent
+
+A new welcome animation
+
+![welcomeAnimation](/Images/welcomeAnimation.gif)
 
 
 
 ## Technical Achievements
-- **Tech Achievement 1**: Email verification for signing up.   
-- **Tech Achievement 3**: Password encryption.  
-- **Tech Achievement 4**: Improved post loading algorithm(load newest/hottest).  
+- **Tech Achievement 1**: Email verification for signing up. The email
+- **Tech Achievement 3**: Password encryption. The users' passwords are much more safe now.
+- **Tech Achievement 4**: Improved post loading algorithm(load newest/hottest). 
 - **Tech Achievement 5**: User can anonymously create new posts.  
 - **Tech Achievement 6**: Added emoji picker in create post window.  
 
@@ -36,7 +60,7 @@ Want to know the most popular topics among friends? The more "like" a post gets,
 - **Design Achievement 5**: Added user's profile photo and username on the post.  
 - **Design Achievement 6**: Email吴禹辛  
 - **Design Achievement 7**: One post is limited to 140 words.  
-- **Design Achievement 8**: Background Animation吴禹辛  
+- **Design Achievement 8**: A new welcome animation which is generated based on complex arithmetical calculation.
 
 Reference:
 Word Cloud: https://codepen.io/stevn/pen/JdwNgw  
