@@ -14,16 +14,19 @@ The users' messages will appear on the screen as sticky posts. The only thing th
 *Since our final project is updated based on Assignment 4 (Prof. allows us to do that), the screenshots and gifs below shows the differences between A4 and FP, and the new features of FP.*
 
 The old home page vs the new home page
+
 ![oldHome](/Images/homePage.png)
 ![newHome](/Images/newHomePage.png)
 
 The old tag vs the new tag
+
 ![oldTag](/Images/oldTag.png)
 ![newTag](/Images/newTag.png)
 
 The new features:
 
 Users can drag the post to any places they want
+
 ![drag](/Images/dragNew.gif)
 
 Users can add emoji in their post
@@ -31,11 +34,13 @@ Users can add emoji in their post
 Users can create post anonymously
 
 Users can view the newest or the hottest posts easily
+
 ![hottest](/Images/hottest.gif)
 
 Users know how many letters should they delete, if their post is too long to be sent
 
 A new welcome animation
+
 ![welcomeAnimation](/Images/welcomeAnimation.gif)
 
 
