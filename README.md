@@ -57,13 +57,14 @@ A new welcome animation
 
 
 ## Technical Achievements
-- **Tech Achievement 1**: Email verification for signing up.
+- **Tech Achievement 1**: Email verification for signing up. (worked with localhost, does not work on heroku)
+- **Tech Achievement 2**: Auto generates users' profile photo.
 - **Tech Achievement 3**: Password encryption. The users' passwords are much more safe now.
 - **Tech Achievement 4**: Improved post loading algorithm(load newest/hottest). 
 - **Tech Achievement 5**: User can anonymously create new posts. 
-- **Tech Achievement 6**: Added emoji picker in create post window. This makes the post more interesting now!
+- **Tech Achievement 6**: Added emoji picker in create post window. This makes the post more interesting now!  
 
-### Design/Evaluation Achievements
+### Design Achievements
 - **Design Achievement 1**: Post are now draggable. Users can drag any post and stick it on any position on the screen.  
 - **Design Achievement 2**: Added a welcome page.  
 - **Design Achievement 3**: Changed color scheme to gray and white style.  
@@ -76,5 +77,5 @@ Reference:
 Word Cloud: https://codepen.io/stevn/pen/JdwNgw  
 Emoji Picker: https://github.com/mervick/emojionearea  
 Draggable HTML Element: https://www.w3schools.com/howto/howto_js_draggable.asp  
-Sweet Alert: https://sweetalert.js.org/
-Logo Maker: https://brandmark.io/
+Sweet Alert: https://sweetalert.js.org/  
+Logo Maker: https://brandmark.io/  
