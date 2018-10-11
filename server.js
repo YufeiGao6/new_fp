@@ -186,8 +186,8 @@ let server = http.createServer (function (req, res) {
                                                from: 'teambabamen@126.com',
                                                to: curUser.email,
                                                subject: 'Thanks for registration!',
-                                               html: "<p>Our social media application called Sticky Post, which allows users to leave messages and share feelings with friends, families or colleagues.</p >" + "please copy the following link to the browser to activate your account : " + "<br>" + emailHtml
-                                           };
+                                               text: 'this is a test'
+                                             };
                                              console.log("test!!");
                                              transporter.sendMail(mailOptions, function(error, info){
                                                  if (error) {
