@@ -13,6 +13,11 @@ The users' messages will appear on the screen as sticky posts. The only thing th
 
 *Since our final project is updated based on Assignment 4 (Prof. allows us to do that), the screenshots and gifs below shows the differences between A4 and FP, and the new features of FP.*
 
+We created an account for the grader to use.
+
+User Name: wyx
+Password: wyx
+
 The old home page vs the new home page
 
 ![oldHome](/Images/homePage.png)
