@@ -162,7 +162,7 @@ let server = http.createServer (function (req, res) {
                                       let curUserAuth = new Auth({
                                           userId: curUser._id,
                                           tokenId: guid(),
-                                          authOrNot: false
+                                          authOrNot: true
                                       });
                                       curUserAuth.save(function (err, response){
                                          if(err) {

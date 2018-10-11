@@ -56,12 +56,14 @@ function createUser() {
             if(sentBackObj.includes("Successfully create your account!")){
                 let curUser = new User(sentBackObj.split(",")[1], username, email, [], sentBackObj.split(",")[2]);
                 window.sessionStorage.setItem('userTokenId', sentBackObj.split(",")[3]);
-                swal({
-                    icon: "success",
-                    title: "Thanks for register!",
-                    text: "An email has sent to you, please verify your account in the email",
-                    closeOnClickOutside: false
-                });
+                // swal({
+                //     icon: "success",
+                //     title: "Thanks for register!",
+                //     text: "An email has sent to you, please verify your account in the email",
+                //     closeOnClickOutside: false
+                // });
+                window.sessionStorage.setItem('user', JSON.stringify(curUser));
+                window.location.href = "/index.html";
             }
         }
     }
