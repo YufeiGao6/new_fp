@@ -423,7 +423,12 @@ function loadTags(hotness) {
                 freq = date.valueOf()/100000000000;
             }
             else{
-                freq = 0.8*score+14;
+                if(score > 18){
+                    freq = 28;
+                }
+                else{
+                    freq = 0.8*score+14;
+                }
             }
 
             let month = date.getMonth()+1;
