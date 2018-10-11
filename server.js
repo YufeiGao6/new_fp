@@ -181,12 +181,12 @@ let server = http.createServer (function (req, res) {
                                                      pass: 'babamen126'
                                                  }
                                              });
-                                             let emailHtml = "http://localhost:8080/index.html" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
+                                             let emailHtml = "http://fp-babamen.herokuapp.com/index.html" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
                                              let mailOptions = {
                                                from: 'teambabamen@126.com',
                                                to: curUser.email,
                                                subject: 'Thanks for registration!',
-                                               html: fs.createReadStream(path.resolve(__dirname, 'Public/html/email.html'))
+                                               html: "<p>Our social media application called Sticky Post, which allows users to leave messages and share feelings with friends, families or colleagues.</p >" + "<a href='"+emailHtml+"'>Click Me To Activate Your Account</a >"
                                            };
                                              console.log("test!!");
                                              transporter.sendMail(mailOptions, function(error, info){
