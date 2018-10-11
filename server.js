@@ -188,6 +188,7 @@ let server = http.createServer (function (req, res) {
                                                subject: 'Thanks for registration!',
                                                html: fs.createReadStream(path.resolve(__dirname, 'Public/html/email.html'))
                                            };
+                                             console.log("test!!");
                                              transporter.sendMail(mailOptions, function(error, info){
                                                  if (error) {
                                                      console.log(error);
