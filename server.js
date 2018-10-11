@@ -184,8 +184,8 @@ let server = http.createServer (function (req, res) {
                                              let emailHtml = "http://localhost:8080/index.html" + "?token=" + curUserAuth.tokenId + "&id=" + curUser._id + "&username=" + curUser.username + "&email=" + curUser.email + "&photourl=" + curUser.photo_url;
                                              let mailOptions = {
                                                from: 'teambabamen@126.com',
-                                               to: 'jackiewu19980311@gmail.com',
-                                               subject: 'Thanks for register!',
+                                               to: curUser.email,
+                                               subject: 'Thanks for registration!',
                                                html: fs.createReadStream(path.resolve(__dirname, 'Public/html/email.html'))
                                            };
                                              transporter.sendMail(mailOptions, function(error, info){
